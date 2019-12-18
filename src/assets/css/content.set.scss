@@ -1,0 +1,19 @@
+// margin设置文件 定义全局的样式拆分
+
+// 导入常态颜色样式
+@import './colors.scss';
+
+// 默认填充宽度
+.w-width{
+    width: 100%;
+}
+
+// 默认填充高度
+.w-height{
+    height: 100%;
+}
+
+// 设置flex布局
+.w-flex{
+    display: flex;
+}
