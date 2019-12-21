@@ -1,6 +1,22 @@
 <template>
-    <div class="header-wrapper w-align-left w-p-1 w-bg-white">
-        <Icon @click.native="toggleMenu" custom="iconfont icon-viewlist" size="30" class="mouse"></Icon>
+    <div class="header-wrapper w-align-left w-p-0 w-bg-dark">
+        <!-- <Icon custom="" size="30" class="mouse"></Icon> -->
+        <i class="iconfont icon-viewlist w-ft-5 mouse w-co-white" @click="toggleMenu" ></i>
+        <!-- 通知消息提示 -->
+        <div class="right-group">
+            <Dropdown trigger="click" class="w-m-left-1 w-m-right-1">
+            <p class="mouse down-user">
+                <i class="iconfont icon-bussiness-man w-ft-5 w-co-white"/>
+                <span class="w-co-white w-height w-m-bottm-2">{{username}}</span>
+                <Icon type="md-arrow-dropdown" size="20" color="white"/>
+            </p>
+            <DropdownMenu slot="list">
+                <DropdownItem>修改资料</DropdownItem>
+                <DropdownItem>个人信息</DropdownItem>
+                <DropdownItem>注销登录</DropdownItem>
+            </DropdownMenu>
+        </Dropdown>
+        </div>
     </div>
 </template>
 <script>
@@ -9,6 +25,10 @@ export default {
         isCollapse: {
             type: Boolean,
             default: false
+        },
+        username: {
+            type: String,
+            default: ''
         }
     },
     methods: {
@@ -19,3 +39,18 @@ export default {
     }
 }
 </script>
+<style lang="scss" scoped>
+@import '@/assets/css/mixins';
+.header-wrapper{
+    @include flex();
+    .demo-badge{
+        width: 30px;
+        height: 30px;
+        background: #eee;
+        display: inline-block;
+    }
+    .down-user{
+        @include flex($justify: flex-start);
+    }
+}
+</style>

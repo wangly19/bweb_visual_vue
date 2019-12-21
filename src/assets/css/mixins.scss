@@ -8,5 +8,5 @@ $base-font-size: 16px;
 }
 
 @mixin setLine($height){
-	line-height: #{$height / $base-font-size}rem;
+	line-height: #{$height}rem;
 }

@@ -19,11 +19,17 @@
     display: flex;
 }
 
+
 // 设置小手
 .mouse{
     cursor: pointer;
 }
 
+@each $item in (left,right) {
+    .w-fo-#{$item}{
+        float: $item;
+    }
+}
 // text-align 属性
 @each $item in (left,center,right) {
     .w-align-#{$item}{

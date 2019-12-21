@@ -1,4 +1,4 @@
-<style lang="scss" scope>
+<style lang="scss" scoped>
 @import '@/assets/css/mixins.scss';
 .slider-wrapper{
   @include flex($direction: column, $justify: space-around, $align: center);
@@ -52,7 +52,7 @@
               background: true,
               content: `tip: ${data.statusText}`
             })
-            data.status ? this.$router.replace({ path: '/' }) : ''
+            data.status ? this.$router.replace({ path: '/' }) : '' // 替换路由为首页
             this.isLoading = false
           } else return false
         })
@@ -100,7 +100,8 @@
             </FormItem>
             </FormItem>
             <FormItem>
-              <Button type="success" class="w-width" size="large" :loading="isLoading" @click="submit('loginCheck')">
+              <Button type="success" class="w-width" size="large"
+              :loading="isLoading" @click="submit('loginCheck')" @keyup.enter="submit('loginCheck')">
                 <span v-if="!isLoading">登录账号</span>
                 <span v-else>登录账号中...</span>
               </Button>
