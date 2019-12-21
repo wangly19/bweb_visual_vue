@@ -8,7 +8,9 @@ const __URL = 'http://wangly.com:8080'
 const loginData = () => {
   return {
     token: Random.string(60), //  生成token
-    roles: ['admin', 'super'] //  生成权限
+    roles: ['admin', 'super'], //  生成权限
+    status: true,
+    statusText: '登录成功'
   }
 }
 
@@ -17,7 +19,9 @@ const userInfo = () => {
     name: 'wangly',
     avatar: '',
     roles: ['admin', 'super'],
-    token: ''
+    token: '',
+    status: true,
+    statusText: '请求成功'
   }
 }
 

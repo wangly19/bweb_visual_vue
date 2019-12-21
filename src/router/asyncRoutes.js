@@ -1,7 +1,6 @@
 const asyncRoutes = [{
     path: '/administrator',
-    name: 'Administrator',
-    redirect: 'administrator/admin1',
+    name: '管理员',
     component: () => import(/* webpackChunkName: "about" */ '../views/Home'),
     meta: {
       title: '管理员板块',
@@ -9,7 +8,7 @@ const asyncRoutes = [{
     },
     children: [{
         path: 'admin1',
-        name: 'Admin',
+        name: '管理员1-1',
         component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
         meta: {
           title: '表单管理',
@@ -18,7 +17,7 @@ const asyncRoutes = [{
       },
       {
         path: 'admin2',
-        name: 'AdminUserManage',
+        name: '管理员1-2',
         component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
         meta: {
           title: '用户管理',
@@ -28,17 +27,32 @@ const asyncRoutes = [{
     ]
   },
   {
-    path: '/Administrator1',
-    name: '第二个',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    path: '/administrator1',
+    name: '管理员',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Home'),
     meta: {
-      title: '管理员专属',
+      title: '管理员板块',
       roles: ['admin']
-    }
-  },
-  {
-    path: '*',
-    redirect: '/404'
+    },
+    children: [{
+        path: 'admin1',
+        name: '管理员1-1',
+        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+        meta: {
+          title: '表单管理',
+          roles: ['admin']
+        }
+      },
+      {
+        path: 'admin2',
+        name: '管理员1-2',
+        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+        meta: {
+          title: '用户管理',
+          roles: ['admin']
+        }
+      }
+    ]
   }
 ]
 export default asyncRoutes

@@ -3,9 +3,8 @@
  * 拦截器消息处理
  * 接收器回调方法
  */
-
+import IV from 'view-design'
 import Axios from 'axios'
-import heyUI from 'heyui'
 import { getLocalStroage } from '../tools/loaclStroage'
 
 const service = Axios.create({
@@ -24,16 +23,15 @@ service.interceptors.request.use(cfg => {
 
 service.interceptors.response.use(
   response => {
-    heyUI.$Loading() // 开启加载事件
+    IV.LoadingBar.start() // 开启加载事件
     if (response.status === 200) {
-      heyUI.$Loading.close() // 停止加载
-    } else {
-      heyUI.$Loading.close() // 停止加载
+       // 停止加载
     }
+    IV.LoadingBar.finish()
     return Promise.resolve(response)
   },
   error => {
-    heyUI.$Loading.close() // 停止加载
+    IV.LoadingBar.error() // 停止加载
     return Promise.reject(error)
   }
 )

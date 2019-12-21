@@ -4,6 +4,8 @@
 html {
     background-color: #fff; /*默认白底*/
     color: #000; /*默认黑字*/
+    font-family: "PingFang SC";
+    font-size: 16px !important;
 }
 
 body,
@@ -32,7 +34,6 @@ pre,
 xmp {
     margin: 0;
     padding: 0;
-    font-size: 16px;
 }
 
 body,
@@ -48,13 +49,6 @@ kbd,
 samp {
     line-height: 1.5;
 }
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
 small,
 big,
 input,

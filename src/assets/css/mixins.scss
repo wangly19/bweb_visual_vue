@@ -1,0 +1,12 @@
+// flex布局
+$base-font-size: 16px;
+@mixin flex($direction: initial, $justify: space-between, $align: center) {
+	display: flex;
+	justify-content: $justify;
+	align-items: $align;
+	flex-direction: $direction;
+}
+
+@mixin setLine($height){
+	line-height: #{$height / $base-font-size}rem;
+}

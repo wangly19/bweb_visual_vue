@@ -17,18 +17,20 @@ Router.beforeEach((to, from, next) => {
       //  判断用户是否加载权限
       if (store.getters.roles.length === 0) {
           // vuex没有用户信息
-          console.log(store)
-          store.dispatch('getUserinfo', getLocalStroage('token'))
-          store.dispatch('init', store.getters.roles)
+          store.dispatch('getUserinfo', getLocalStroage('token')) // => 获取个人信息
+          store.dispatch('init', store.getters.roles) // => 根据个人信息获取路由列表
+          Router.addRoutes(store.getters.router)
       }
       next()
     }
   } else {
     // 无token
     if (whiteList.includes(to.path)) {
-        next()
+      next()
     } else {
-        next('/login')
+      next({
+        path: '/login'
+      })
     }
   }
 })

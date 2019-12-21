@@ -11,8 +11,13 @@ import 'heyui/themes/index.css'
 import './assets/css/reset.css'
 // 引入公共css
 import './assets/css/content.set.scss'
+// 引入iview
+import viewUI from 'view-design'
+// 引入iview的css
+import 'view-design/dist/styles/iview.css'
 // 引入HEYUI
 Vue.use(heyUI)
+Vue.use(viewUI)
 // 引入mock
 import './mock'
 

@@ -1,8 +1,10 @@
 <style lang="scss">
   .home {
     height: 100%;
+
     .h-layout {
       height: 100%;
+
       .h-layout-sider {
         .h-menu {
           height: 100%;
@@ -15,7 +17,7 @@
   <div class="home">
     <h-layout>
       <h-sider>
-        <h-menu :datas="data" @select="select" ref="menu"></h-menu>
+        <h-menu :datas="router" @select="select" ref="menu" :option="{titleName: 'name', keyName: 'name'}"></h-menu>
       </h-sider>
       <h-layout>
         <h-header>
@@ -30,43 +32,35 @@
   </div>
 </template>
 <script>
+  import {
+    mapGetters
+  } from 'vuex'
   import Header from './Layout/Header'
   export default {
     name: 'home',
     data() {
       return {
-        activeAll: false,
-        data: [{
-            title: '首页',
-            key: 'home',
-            icon: 'h-icon-home'
-          },
-          {
-            title: '关于',
-            key: 'abouts',
-            icon: 'h-icon-info'
-          }
-        ]
+        activeAll: false
       }
     },
     methods: {
       select(data) {
+        console.log(this.$routes)
         this.$router.push({
-          name: data.key
+          path: data.path
         })
-      }
-    },
-    watch: {
-      $route() {
-        console.log(this.$route.name)
-        if (this.$route.name) {
-          this.$refs.menu.select(this.$route.name)
-        }
-        console.log(this.$router)
       }
     },
     components: {
       'w-header': Header
+    },
+    watch: {
+      $route() {
+        console.log(this.$route)
+      }
+    },
+    computed: {
+      ...mapGetters(['router'])
     }
   }
 

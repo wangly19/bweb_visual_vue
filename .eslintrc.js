@@ -76,7 +76,11 @@ module.exports = {
     'arrow-parens': 0,
     // 规范generator函数的使用
     'generator-star-spacing': [2, { 'before': false, 'after': true }],
-    'no-return-assign': 0
+    'no-return-assign': 0,
+    'vue/no-parsing-error': [2, {
+      'x-invalid-end-tag': false
+    }],
+    '(no-trailing-spaces': 0
   },
   parserOptions: {
     parser: 'babel-eslint'

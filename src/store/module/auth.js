@@ -50,6 +50,11 @@ function hasRoles(route, roles) {
     return true
 }
 
+/**
+ * 递归鉴定权限，生成可用路由列表
+ * @param {array} routes => 路由数组
+ * @param {array} roles => 权限数组
+ */
 function filterRoutes(routes, roles) {
     console.log(routes)
     let result = []

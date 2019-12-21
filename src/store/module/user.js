@@ -27,9 +27,9 @@ const actions = {
                 if (res.status === 200) {
                     commit('_setToken', res.data.token) //  存储token
                     setLocalStroage('token', res.data.token)
-                    resolve(true)
+                    resolve(res)
                 }
-                reject(false)
+                resolve(res)
             })
         })
     },
