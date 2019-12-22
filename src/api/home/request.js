@@ -14,7 +14,14 @@ const getInfo = () => {
   })
 }
 
+const getCardList = () => {
+  return http({
+    url: `/api/card/list`,
+    method: 'get'
+  })
+}
 export {
   getMons,
-  getInfo
+  getInfo,
+  getCardList
 }

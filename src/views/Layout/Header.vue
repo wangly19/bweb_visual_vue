@@ -1,9 +1,9 @@
 <template>
-    <div class="header-wrapper w-align-left w-p-0 w-bg-dark">
+    <div class="header-wrapper w-align-left w-p-0 w-bg-dark w-width">
         <!-- <Icon custom="" size="30" class="mouse"></Icon> -->
         <i class="iconfont icon-viewlist w-ft-5 mouse w-co-white" @click="toggleMenu" ></i>
         <!-- 通知消息提示 -->
-        <div class="right-group">
+        <div class="right-group flex">
             <Dropdown trigger="click" class="w-m-left-1 w-m-right-1">
             <p class="mouse down-user">
                 <i class="iconfont icon-bussiness-man w-ft-5 w-co-white"/>
@@ -42,13 +42,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/css/mixins';
 .header-wrapper{
-    @include flex();
-    .demo-badge{
-        width: 30px;
-        height: 30px;
-        background: #eee;
-        display: inline-block;
-    }
+    @include flex($justify: flex-start);
     .down-user{
         @include flex($justify: flex-start);
     }

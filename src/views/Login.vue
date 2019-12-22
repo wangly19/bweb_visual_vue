@@ -11,6 +11,7 @@
   import {
     mapActions
   } from 'vuex'
+  import { debounce } from '@/tools/util'
   export default {
     name: 'login',
     data() {
@@ -56,7 +57,10 @@
             this.isLoading = false
           } else return false
         })
-      }
+      },
+      register: debounce(function() {
+        console.log('注册函数')
+      }, 1500)
     },
     computed: {
       ...mapActions(['login'])
@@ -109,7 +113,7 @@
             <FormItem>
               <a href="#" class="w-co-black">忘记密码</a>
               <Divider type="vertical" />
-              <a href="#">注册账号</a>
+              <a href="#" @click="register">注册账号</a>
             </FormItem>
           </Form>
           <!-- 底部声明 -->

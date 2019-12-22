@@ -1,5 +1,5 @@
 <template>
-  <Menu theme="dark" width="auto" :class="`menu-item ${isCollapse ? 'collapsed-menu':''}`" :accordion="true">
+  <Menu theme="light" width="auto" :class="`w-heieght menu-item ${isCollapse ? 'collapsed-menu':''}`" :accordion="true">
     <div v-for="(item,index) in router" :key="index">
       <div class="is-collap" v-if="!isCollapse">
         <Submenu v-if="item.children && item.children.length > 1" :name="item.path">
@@ -32,9 +32,9 @@
           <MenuItem :name="index">
           <Icon custom="iconfont icon-integral" />
           </MenuItem>
-          <DropdownMenu slot="list" style="background-color: red;">
-            <DropdownItem v-for="(child, childIndex) in item.children" :key="childIndex" class="w-bg-dark">
-              <MenuItem :name="child.path" :to="child.path"  class="w-bg-dark">
+          <DropdownMenu slot="list">
+            <DropdownItem v-for="(child, childIndex) in item.children" :key="childIndex" >
+              <MenuItem :name="child.path" :to="child.path">
               <Icon type="md-document" />
               {{child.name}}
               </MenuItem>
@@ -99,14 +99,5 @@
       vertical-align: middle;
       font-size: 1.375rem /* 22/16 */;
     }
-  .ivu-dropdown-item:hover{
-      background-color: #515a6e;
-      color: red;
-    }
-  .ivu-dropdown .ivu-select-dropdown {
-    overflow: visible;
-    max-height: none;
-    background-color: #515a6e !important;
-  }
 }
 </style>

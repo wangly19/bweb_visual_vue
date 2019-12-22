@@ -19,6 +19,10 @@
     display: flex;
 }
 
+// ⚪
+.w-circle{
+    border-radius: 50%;
+}
 
 // 设置小手
 .mouse{
@@ -40,7 +44,7 @@
 // 设置背景颜色
 @each $index,$item in $colors {
     .w-bg-#{$index}{
-        background: $item;
+        background: $item !important;
     }
 }
 

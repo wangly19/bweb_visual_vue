@@ -3,11 +3,18 @@
  */
 import Home from '../views/Home.vue'
 import Main from '../views/Layout/Home.vue'
+import Desktop from '../views/Dashboard'
 
 export default [{
     path: '/',
     name: '首页',
-    component: Main
+    component: Main,
+    redirect: '/desktop',
+    children: [{
+      path: '/desktop',
+      name: '首页',
+      component: Desktop
+    }]
   },
   {
     path: '/about',
@@ -28,11 +35,13 @@ export default [{
   {
     path: '/404',
     name: '错误警告',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    hidden: true // 隐藏页面
   },
   {
     path: '*',
     name: '错误警告',
-    redirect: '/404'
+    redirect: '/404',
+    hidden: true // 隐藏页面
   }
 ]

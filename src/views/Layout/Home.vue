@@ -7,11 +7,11 @@
           <w-logo :isCollapse="isCollapse"></w-logo>
           <w-slide :router="router" :isCollapse="isCollapse"></w-slide>
         </Sider>
-        <Layout>
-          <w-header :username="name"></w-header>
-          <div class="container w-m-0 w-height">
-            <Content class="w-bg-white w-height">
-              Content
+        <Layout style="overflow: hidden;">
+          <w-header :username="name" :style="{position: 'fixed'}"></w-header>
+          <div class="container w-height w-m-top-6">
+            <Content class="w-bg-white w-height w-m-0">
+              <router-view></router-view>
             </Content>
           </div>
         </Layout>
