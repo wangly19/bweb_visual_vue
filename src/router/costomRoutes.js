@@ -1,9 +1,7 @@
 /**
  * 渲染的路由列表
  */
-import Home from '../views/Home.vue'
 import Main from '../views/Layout/Home.vue'
-import Desktop from '../views/Dashboard'
 
 export default [{
     path: '/',
@@ -13,13 +11,24 @@ export default [{
     children: [{
       path: '/desktop',
       name: '首页',
-      component: Desktop
+      component: () => import('@/views/Dashboard')
+    }]
+  },
+  {
+    path: '/machine',
+    name: '设备',
+    component: Main,
+    redirect: '/machine/index',
+    children: [{
+      path: 'index',
+      name: '设备',
+      component: () => import('@/views/Machine')
     }]
   },
   {
     path: '/about',
     name: '关于',
-    component: Home,
+    component: Main,
     children: [{
       path: '/about/a1',
       name: '关于',

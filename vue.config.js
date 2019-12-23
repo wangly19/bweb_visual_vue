@@ -9,5 +9,8 @@ module.exports = {
     // 修改文件引入自定义路径
     config.resolve.alias
       .set('@', resolve('src')) // 配置@路径
+  },
+  devServer: {
+    port: 9000 // 9000端口打开服务，区分项目
   }
 }
