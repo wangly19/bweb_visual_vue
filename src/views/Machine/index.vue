@@ -13,11 +13,15 @@
              key: 'name'
            },
            {
-             title: '线路',
+             title: '所属范围',
              key: 'age'
            },
            {
              title: '警告',
+             key: 'address'
+           },
+           {
+             title: '机器/型号',
              key: 'address'
            },
            {
