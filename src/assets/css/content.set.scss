@@ -29,6 +29,10 @@
     cursor: pointer;
 }
 
+.check{
+    transition: all .2;
+}
+
 @each $item in (left,right) {
     .w-fo-#{$item}{
         float: $item;

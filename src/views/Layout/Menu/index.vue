@@ -1,14 +1,14 @@
 <template>
-  <Menu theme="light" width="auto" :class="`w-heieght menu-item ${isCollapse ? 'collapsed-menu':''}`" :accordion="true">
+  <Menu theme="light" width="auto" class="menu-item" :class="isCollapse && 'collapsed-menu'" :accordion="true" style="height: calc(100% - 53px);">
     <div v-for="(item,index) in router" :key="index">
       <div class="is-collap" v-if="!isCollapse">
-        <Submenu v-if="item.children && item.children.length > 1" :name="item.path">
+        <Submenu v-if="item.children && item.children.length > 1" :name="item.path" :to="item.path">
           <template slot="title">
             <Icon type="ios-navigate"></Icon>
             {{item.name}}
           </template>
           <div v-for="(child, childIndex) in item.children" :key="childIndex">
-            <Submenu v-if="child.children" :name="child.path">
+            <Submenu v-if="child.children" :name="child.path" :to="child.path">
               <template slot="title">
                 <Icon type="ios-navigate"></Icon>
                 {{child.name}}
@@ -33,7 +33,7 @@
           <Icon custom="iconfont icon-integral" />
           </MenuItem>
           <DropdownMenu slot="list">
-            <DropdownItem v-for="(child, childIndex) in item.children" :key="childIndex" >
+            <DropdownItem v-for="(child, childIndex) in item.children" :key="childIndex">
               <MenuItem :name="child.path" :to="child.path">
               <Icon type="md-document" />
               {{child.name}}
@@ -61,11 +61,11 @@
       }
     }
   }
-
 </script>
 <style lang="scss">
   .menu-item {
     border: none;
+
     span {
       display: inline-block;
       overflow: hidden;
@@ -75,7 +75,8 @@
       vertical-align: bottom;
       transition: width .2s ease .2s;
     }
-    &.span:hover{
+
+    &.span:hover {
       color: red;
     }
 
@@ -97,7 +98,9 @@
       transform: translateX(5px);
       transition: font-size .2s ease .2s, transform .2s ease .2s;
       vertical-align: middle;
-      font-size: 1.375rem /* 22/16 */;
+      font-size: 1.375rem
+        /* 22/16 */
+      ;
     }
-}
+  }
 </style>

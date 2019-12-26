@@ -24,11 +24,11 @@
               type: Object
           }
       },
-      watch: {},
       computed: {
       },
       mounted() {
-        console.log(this.$props)
+      },
+      created() {
       }
   }
 

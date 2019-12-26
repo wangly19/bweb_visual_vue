@@ -4,16 +4,14 @@
       <Layout>
         <!-- 侧边栏选项卡 -->
         <Sider hide-trigger class="w-bg-white" collapsible v-model="isCollapse" :collapsed-width="78">
-          <w-logo :isCollapse="isCollapse"></w-logo>
+          <w-logo :isCollapse="isCollapse" ref="logo"></w-logo>
           <w-slide :router="router" :isCollapse="isCollapse"></w-slide>
         </Sider>
-        <Layout style="overflow: hidden;">
-          <w-header :username="name" :style="{position: 'fixed'}"></w-header>
-          <div class="container w-height w-m-top-6">
-            <Content class="w-bg-white w-height w-m-0">
+        <Layout class="w-height">
+          <w-header :username="name"></w-header>
+            <Content class="w-m-1 w-height">
               <router-view></router-view>
             </Content>
-          </div>
         </Layout>
       </Layout>
     </Layout>
@@ -27,6 +25,11 @@
   import SlideMenu from './Menu'
   import LOGO from './Menu/Logo'
   export default {
+    data() {
+      return {
+        logoHieght: 53
+      }
+    },
     components: {
       'w-header': Header,
       'w-slide': SlideMenu,
@@ -34,7 +37,11 @@
     },
     computed: {
       ...mapGetters(['router', 'isCollapse', 'name'])
+    },
+    mounted() {
+      this.$nextTick(() => {
+        this.logoHieght = this.$refs.logo.$el.offsetHeight
+      })
     }
   }
-
 </script>

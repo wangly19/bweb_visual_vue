@@ -1,21 +1,23 @@
 <template>
     <div class="header-wrapper w-align-left w-p-0 w-bg-dark w-width">
         <!-- <Icon custom="" size="30" class="mouse"></Icon> -->
-        <i class="iconfont icon-viewlist w-ft-5 mouse w-co-white" @click="toggleMenu" ></i>
+        <i class="iconfont w-ft-5 mouse w-co-white check" @click="toggleMenu" :class="$store.state.app.isCollapse ? 'icon-viewgallery' : 'icon-viewlist'"></i>
         <!-- 通知消息提示 -->
         <div class="right-group flex">
-            <Dropdown trigger="click" class="w-m-left-1 w-m-right-1">
-            <p class="mouse down-user">
-                <i class="iconfont icon-bussiness-man w-ft-5 w-co-white"/>
-                <span class="w-co-white w-height w-m-bottm-2">{{username}}</span>
-                <Icon type="md-arrow-dropdown" size="20" color="white"/>
-            </p>
-            <DropdownMenu slot="list">
-                <DropdownItem>修改资料</DropdownItem>
-                <DropdownItem>个人信息</DropdownItem>
-                <DropdownItem>注销登录</DropdownItem>
-            </DropdownMenu>
-        </Dropdown>
+            <i class="iconfont icon-code w-ft-5 w-co-white w-m-right-1 mouse"></i>
+            <i class="iconfont icon-connections w-ft-5 w-co-white w-m-right-1 mouse"></i>
+            <Dropdown trigger="click" class="w-m-right-1">
+                <p class="mouse down-user">
+                    <i class="iconfont icon-bussiness-man w-ft-5 w-co-white"/>
+                    <span class="w-co-white w-height w-m-bottm-2">{{username}}</span>
+                    <Icon type="md-arrow-dropdown" size="20" color="white"/>
+                </p>
+                <DropdownMenu slot="list">
+                    <DropdownItem>修改资料</DropdownItem>
+                    <DropdownItem>个人信息</DropdownItem>
+                    <DropdownItem>注销登录</DropdownItem>
+                </DropdownMenu>
+            </Dropdown>
         </div>
     </div>
 </template>
@@ -42,7 +44,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/css/mixins';
 .header-wrapper{
-    @include flex($justify: flex-start);
+    @include flex($justify: space-between);
     .down-user{
         @include flex($justify: flex-start);
     }
