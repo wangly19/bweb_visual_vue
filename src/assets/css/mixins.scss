@@ -1,7 +1,7 @@
 /**
 * mixins 和 function 混用
 */
-$base-font-size: 16px;
+// flexMixins
 @mixin flex($direction: initial, $justify: space-between, $align: center) {
 	display: flex;
 	justify-content: $justify;
@@ -9,6 +9,8 @@ $base-font-size: 16px;
 	flex-direction: $direction;
 }
 
+// 转换REM函数
+$base-font-size: 16px;
 @function REM($px) {
-	@return $px / $base-font-size;
+	@return #{$px / 16px}rem;
 }

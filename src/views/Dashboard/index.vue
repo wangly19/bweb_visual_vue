@@ -29,16 +29,13 @@
                 <span>查看</span>
               </ListItem>
             </Scroll> -->
-            <ListItem class="wraning-item">
+            <ListItem class="wraning-item" v-for="(item, index) in 4" :key="index">
+              <span>{{index}}</span>
               <span>104594</span>
               <span>流电表</span>
               <span>刘一</span>
-              <span>紧急处理</span>
+              <span class="w-co-danger">紧急处理</span>
             </ListItem>
-            <ListItem>1</ListItem>
-            <ListItem>1</ListItem>
-            <ListItem>1</ListItem>
-            <ListItem>1</ListItem>
           <template slot="footer">
             <ButtonGroup>
               <Button type="primary">
@@ -55,6 +52,9 @@
       </Col>
       <Col span="16">
         <Card>
+          <i-circle :percent="80">
+            <span class="demo-Circle-inner" style="font-size:24px">80%</span>
+          </i-circle>
         </Card>
       </Col>
     </Row>
@@ -152,6 +152,7 @@
 @import '@/assets/css/mixins.scss';
 .dashboard-wrapper{
   .wraning-list{
+    height: REM(5000px);
     .wraning-item{
       @include flex($justify: space-around);
     }

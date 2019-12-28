@@ -9,9 +9,9 @@
         </Sider>
         <Layout class="w-height">
           <w-header :username="name"></w-header>
-            <Content class="w-m-1 w-height">
-              <router-view></router-view>
-            </Content>
+          <Content class="w-p-1 w-height scroll">
+            <router-view></router-view>
+          </Content>
         </Layout>
       </Layout>
     </Layout>

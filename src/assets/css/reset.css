@@ -6,8 +6,8 @@ html {
     color: #000; /*默认黑字*/
     font-family: "PingFang SC";
     font-size: 16px !important;
+    overflow: hidden;
 }
-
 body,
 ul,
 ol,
@@ -34,6 +34,7 @@ pre,
 xmp {
     margin: 0;
     padding: 0;
+    font-family: '微软雅黑';
 }
 
 body,

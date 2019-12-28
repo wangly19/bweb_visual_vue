@@ -26,6 +26,17 @@ export default [{
     }]
   },
   {
+    path: '/gis',
+    name: 'GIS',
+    redirect: '/gis/index',
+    component: Main,
+    children: [{
+      path: 'index',
+      name: 'GIS',
+      component: () => import('@/views/GIS')
+    }]
+  },
+  {
     path: '/about',
     name: '关于',
     component: Main,
