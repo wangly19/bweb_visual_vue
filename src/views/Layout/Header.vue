@@ -8,8 +8,8 @@
             <i class="iconfont icon-connections w-ft-5 w-co-white w-m-right-1 mouse"></i>
             <Dropdown trigger="click" class="w-m-right-1">
                 <p class="mouse down-user">
-                    <i class="iconfont icon-bussiness-man w-ft-5 w-co-white"/>
-                    <span class="w-co-white w-height w-m-bottm-2">{{username}}</span>
+                    <Avatar icon="ios-person" />
+                    <span class="w-co-white w-height w-p-left-0">{{username}}</span>
                     <Icon type="md-arrow-dropdown" size="20" color="white"/>
                 </p>
                 <DropdownMenu slot="list">

@@ -6,7 +6,7 @@
           <Cascader :data="item.data" v-model="searchData[screenConfig[index].name]" :placeholder="item.info"/>
         </template>
         <template v-if="item.isSelect">
-          <Select v-model="searchData[screenConfig[index].name]" style="width:200px">
+          <Select v-model="searchData[screenConfig[index].name]" type="text" style="width: 150px;" :placeholder="item.info">
             <Option v-for="item in item.data" :value="item.value" :key="item.value">{{ item.label }}</Option>
           </Select>
         </template>

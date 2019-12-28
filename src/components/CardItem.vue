@@ -1,5 +1,5 @@
 <template>
-  <Card class="card-body" :style="background">
+  <Card class="card-body" :style="background" :bordered="false">
     <div class="w-flex w-m-left-1 w-m-right-1">
       <div style="margin: auto">
         <Icon :type="database.icon" size="40" class="icon-bg w-co-white" />

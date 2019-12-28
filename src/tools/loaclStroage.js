@@ -2,14 +2,13 @@
 
 /**
  * 获取存储节点
- * @param {string} where
+ * @param {string} where => 获取存储的item字段
  */
 const getLocalStroage = (where) => localStorage.getItem(where)
 
 /**
  * 设置存储值
- * @param {string} key
- * @param {any} value
+ * @param {string}
  */
 const setLocalStroage = (key, value) => localStorage.setItem(key, value)
 

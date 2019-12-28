@@ -65,11 +65,10 @@
 <style lang="scss">
   .menu-item {
     border: none;
-
     span {
       display: inline-block;
       overflow: hidden;
-      width: 69px;
+      width: 4.3125rem /* 69/16 */;
       text-overflow: ellipsis;
       white-space: nowrap;
       vertical-align: bottom;
@@ -98,9 +97,7 @@
       transform: translateX(5px);
       transition: font-size .2s ease .2s, transform .2s ease .2s;
       vertical-align: middle;
-      font-size: 1.375rem
-        /* 22/16 */
-      ;
+      font-size: 1.375rem /* 22/16 */;
     }
   }
 </style>

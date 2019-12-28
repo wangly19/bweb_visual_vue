@@ -44,7 +44,7 @@ export default [{
   {
     path: '/404',
     name: '错误警告',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    component: () => import('@/views/404'),
     hidden: true // 隐藏页面
   },
   {
