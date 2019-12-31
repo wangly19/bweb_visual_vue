@@ -7,6 +7,7 @@ export default {
     // 全局配置数据导入
     isCollapse: state => state.app.isCollapse,
     isSlider: state => state.app.isSlider,
+    keepList: state => state.app.keepList,
     // routesPermiss模块数据导入
     router: state => state.auth.router,
     routesList: state => state.auth.routesList

@@ -22,6 +22,7 @@
         <Button type="error" @click="bindEmpty">清空</Button>
       </div>
     </ul>
+    <Button type="success" class="w-m-right-1" @click="bindOpen">添加数据</Button>
   </div>
 </template>
 <script>
@@ -42,13 +43,19 @@ export default {
       this.$emit('onSearchData', this.searchData)
     },
     bindEmpty() {
+    },
+    bindOpen() {
+      this.$emit('onOpenDialog', false)
     }
   }
 }
 </script>
 <style lang="scss" scoped>
 @import '@/assets/css/mixins.scss';
-.screen-wrapper ul{
-  @include flex($justify: flex-start);
+.screen-wrapper{
+  @include flex();
+  ul{
+    @include flex($justify: flex-start);
+  }
 }
 </style>

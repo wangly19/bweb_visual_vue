@@ -1,11 +1,11 @@
 <template>
   <div class="dashboard-wrapper">
-    <Row :gutter="50">
+    <Row :gutter="30">
       <Col span="6" v-for="item in cardList" :key="item.id">
       <w-card-item :background="item.background" :database="item.database"></w-card-item>
       </Col>
     </Row>
-    <Row :gutter="50" class="w-m-top-1 w-m-bottom-1">
+    <Row :gutter="30" class="w-m-top-1 w-m-bottom-1">
       <Col span="18">
         <Card>
           <div style="text-align:center">
@@ -21,40 +21,49 @@
         </Card>
       </Col>
     </Row>
-    <Row :gutter="50">
+    <Row :gutter="30">
       <Col span="8">
-        <List header="实时警报" border size="small" class="w-bg-white wraning-list">
-            <!-- <Scroll dis-hover height="200" >
-              <ListItem v-for="(item, index) in list1" :key="index">
-                <span>查看</span>
-              </ListItem>
-            </Scroll> -->
-            <ListItem class="wraning-item" v-for="(item, index) in 4" :key="index">
-              <span>{{index}}</span>
-              <span>104594</span>
-              <span>流电表</span>
-              <span>刘一</span>
-              <span class="w-co-danger">紧急处理</span>
-            </ListItem>
-          <template slot="footer">
-            <ButtonGroup>
-              <Button type="primary">
-                <Icon type="ios-arrow-back"></Icon>
-                Backward
-              </Button>
-              <Button type="primary">
-                Forward
-                <Icon type="ios-arrow-forward"></Icon>
-              </Button>
-          </ButtonGroup>
-          </template>
-        </List>
+        <Card class="update-device">
+          <div slot="title" class="title">
+            <span>归属单位</span>
+            <span>本月</span>
+            <span>本季度</span>
+          </div>
+            <ul class="bash-body">
+              <li v-for="item in 5" :key="item">
+                <span>华南理工大学</span>
+                <span>29</span>
+                <span>47</span>
+              </li>
+            </ul>
+        </Card>
       </Col>
-      <Col span="16">
-        <Card>
-          <i-circle :percent="80">
-            <span class="demo-Circle-inner" style="font-size:24px">80%</span>
-          </i-circle>
+      <Col span="8">
+        <Card class="w-align-left bash-view">
+          <span slot="title" class="bbd">仪表盘</span>
+          <div class="bash-body">
+            <div ref="bash" id="bash" class="bash-chart"></div>
+            <ul>
+              <li v-for="item in 5" :key="item" class="p-mini"><Badge color="blue" text="blue" /></li>
+            </ul>
+            <ul>
+              <li v-for="item in 5" :key="item" class="p-mini"><Badge color="blue" text="blue" /></li>
+            </ul>
+            <ul>
+              <li v-for="item in 5" :key="item" class="p-mini"><Badge color="blue" text="blue" /></li>
+            </ul>
+          </div>
+        </Card>
+      </Col>
+      <Col span="8">
+        <Card class="w-align-left carry-control">
+          <span slot="title" class="bbd">实施进度</span>
+            <ul class="bash-body">
+              <li v-for="item in 5" :key="item">
+                <span>赵子俊</span>
+                <Progress :percent="45" status="active" />
+              </li>
+            </ul>
         </Card>
       </Col>
     </Row>
@@ -62,7 +71,7 @@
 </template>
 <script>
   import CardItem from '@/components/CardItem'
-  import { option } from '@/config/echarts/homeOptions'
+  import { option, options2, options3 } from '@/config/echarts/homeOptions'
   import {
     getCardList
   } from '@/api/home/request'
@@ -71,8 +80,7 @@
   export default {
     data() {
       return {
-        cardList: [],
-        list1: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        cardList: []
       }
     },
     watch: {
@@ -91,50 +99,9 @@
       // 等待dom 加载完成
       this.$nextTick(() => {
         // 开始绘制图表
-        this.drawLine(this.$refs.consume, {
-          title: {
-            text: '设备占用',
-            x: 'left',
-            align: 'right'
-          },
-          tooltip: {
-            trigger: 'item',
-            formatter: '{a} <br/>{b}: {c} ({d}%)'
-          },
-          legend: {
-            orient: 'horizontal',
-            x: 'center',
-            y: 'bottom',
-            data: ['直接访问', '邮件营销']
-          },
-          series: [{
-            value: 335,
-            type: 'pie',
-            avoidLabelOverlap: false,
-            radius: ['50%', '70%'],
-            label: {
-              normal: {
-                show: false,
-                position: 'center'
-              },
-              emphasis: {
-                show: true,
-                textStyle: {
-                  fontSize: '15'
-                }
-              }
-            },
-            data: [{
-              value: 335,
-              name: '直接访问'
-            },
-            {
-              value: 310,
-              name: '邮件营销'
-            }]
-          }]
-        })
+        this.drawLine(this.$refs.consume, options2)
         this.drawLine(this.$refs.line, option)
+        this.drawLine(this.$refs.bash, options3)
       })
     },
     async created() {
@@ -151,10 +118,57 @@
 <style lang="scss" scoped>
 @import '@/assets/css/mixins.scss';
 .dashboard-wrapper{
+  // 公共类
+  .p-mini{
+    padding-top: REM(2px);
+    padding-bottom: REM(2px);
+  }
+  .bbd{
+    padding-left: REM(10px);
+    border-left: REM(5px) solid $greey-1;
+  }
+  // 实时列表
   .wraning-list{
-    height: REM(5000px);
     .wraning-item{
       @include flex($justify: space-around);
+    }
+  }
+  // 新的设备
+  .update-device{
+    .title, .bash-body li{
+      padding-top: REM(2px);
+      padding-bottom: REM(2px);
+      span:nth-child(1){
+        flex: 0 0 REM(100px);
+      }
+      span:nth-child(2){
+        flex: 0 0 REM(150px);
+      }
+      @include flex($justify: space-btween);
+    }
+  }
+  .bash-view{
+    .bash-body{
+      @include flex($justify: flex-start);
+      ul{
+        flex: 0 0 1;
+        padding: 0 REM(15px);
+      }
+      .bash-chart{
+        height: REM(130px);
+        width: REM(130px);
+      }
+    }
+  }
+  // 实施进度
+  .carry-control{
+    .bash-body li{
+      padding-top: REM(2px);
+      padding-bottom: REM(2px);
+      @include flex();
+      span{
+        flex: 0 0 REM(70px);
+      }
     }
   }
 }

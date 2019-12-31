@@ -66,7 +66,89 @@ const option = {
     smooth: true
   }]
 }
-
+const options2 = {
+  title: {
+    text: '设备占用',
+    x: 'left',
+    align: 'right'
+  },
+  tooltip: {
+    trigger: 'item',
+    formatter: '{a} <br/>{b}: {c} ({d}%)'
+  },
+  legend: {
+    orient: 'horizontal',
+    x: 'center',
+    y: 'bottom',
+    data: ['直接访问', '邮件营销']
+  },
+  series: [{
+    value: 335,
+    type: 'pie',
+    avoidLabelOverlap: false,
+    radius: ['50%', '70%'],
+    label: {
+      normal: {
+        show: false,
+        position: 'center'
+      },
+      emphasis: {
+        show: true,
+        textStyle: {
+          fontSize: '15'
+        }
+      }
+    },
+    data: [{
+      value: 335,
+      name: '直接访问'
+    },
+    {
+      value: 310,
+      name: '邮件营销'
+    }]
+  }]
+}
+const options3 = {
+  tooltip: {
+    trigger: 'item',
+    formatter: '{a} <br/>{b}: {c} ({d}%)'
+  },
+  series: [{
+    value: 335,
+    type: 'pie',
+    avoidLabelOverlap: false,
+    radius: ['40%', '80%'],
+    label: {
+      normal: {
+        show: false,
+        position: 'center'
+      }
+    },
+    data: [{
+      value: 335,
+      name: '直接访问'
+    },
+    {
+      value: 310,
+      name: '邮件营销'
+    },
+    {
+      value: 310,
+      name: '邮件营销1'
+    },
+    {
+      value: 310,
+      name: '邮件营销2'
+    },
+    {
+      value: 310,
+      name: '邮件营销3'
+    }]
+  }]
+}
 export {
-  option
+  option,
+  options2,
+  options3
 }

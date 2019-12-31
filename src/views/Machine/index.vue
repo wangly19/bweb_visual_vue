@@ -3,18 +3,18 @@
      <div class="maching-wrapper  w-height">
        <Table :columns="columns1" :data="data1" ref="currentRowTable" :loading="loading" stripe class="w-height" tooltip-theme="dark">
          <template slot="header">
-           <w-screens :screenConfig="screenConfig" @onSearchData="backSerachData"></w-screens>
+           <w-screens :screenConfig="screenConfig" @onSearchData="backSerachData" @onOpenDialog="backOpenDialog"></w-screens>
          </template>
          <template slot-scope="{ row, index }" slot="action">
            <Button type="primary" size="small" style="margin-right: 0.3125rem;" @click="show(index)">详情</Button>
            <Dropdown trigger="click">
              <Button type="success" class="" size="small" @click="remove(index)">更多</Button>
              <DropdownMenu slot="list">
-               <DropdownItem>驴打滚</DropdownItem>
-               <DropdownItem>炸酱面</DropdownItem>
-               <DropdownItem>豆汁儿</DropdownItem>
-               <DropdownItem>冰糖葫芦</DropdownItem>
-               <DropdownItem>北京烤鸭</DropdownItem>
+               <DropdownItem>查看</DropdownItem>
+               <DropdownItem>修改</DropdownItem>
+               <DropdownItem>删除</DropdownItem>
+               <DropdownItem>冻结</DropdownItem>
+               <DropdownItem>上报</DropdownItem>
              </DropdownMenu>
            </Dropdown>
          </template>
@@ -23,6 +23,15 @@
          </template>
        </Table>
      </div>
+     <Modal
+        v-model="machDialog"
+        title="Common Modal dialog box title"
+        @on-ok="ok"
+        @on-cancel="cancel">
+        <p>Content of dialog</p>
+        <p>Content of dialog</p>
+        <p>Content of dialog</p>
+    </Modal>
    </div>
  </template>
  <script>
@@ -36,6 +45,7 @@
          limit: 10,
          currentPage: 1,
          loading: false,
+         machDialog: false,
          screenConfig: [{
            name: 'titleValue',
            info: '请输入设备号',
@@ -176,6 +186,9 @@
        },
        backSerachData(data) {
          console.log(data)
+       },
+       backOpenDialog(Bool) {
+         this.machDialog = Boolean
        }
      },
      components: {

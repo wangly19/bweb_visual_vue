@@ -10,7 +10,9 @@
         <Layout class="w-height">
           <w-header :username="name"></w-header>
           <Content class="w-p-1 w-height scroll">
-            <router-view></router-view>
+            <keep-alive>
+              <router-view></router-view>
+            </keep-alive>
           </Content>
         </Layout>
       </Layout>
