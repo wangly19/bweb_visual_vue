@@ -1,5 +1,7 @@
 <template>
-  <Menu theme="light" width="auto" class="menu-item" :class="isCollapse && 'collapsed-menu'" :accordion="true" style="height: calc(100% - 53px);">
+  <Menu theme="light" width="auto" class="menu-item" :class="isCollapse && 'collapsed-menu'" :accordion="true"
+  :active-name="$route.path"
+  style="height: calc(100% - 53px);">
     <div v-for="(item,index) in router" :key="index">
       <div class="is-collap" v-if="!isCollapse">
         <Submenu v-if="item.children && item.children.length > 1" :name="item.path" :to="item.path">
@@ -22,15 +24,16 @@
             </div>
           </div>
         </Submenu>
-        <MenuItem v-else :name="item.path" v-show="!item.hidden" :to="item.path">
+        <MenuItem v-else :name="item.path" v-show="!item.hidden" :to="item.path"
+        :class="$route.path === item.path && 'ivu-menu-item ivu-menu-item-active ivu-menu-item-selected'">
         <Icon type="md-document" />
         {{item.name}}
         </MenuItem>
       </div>
       <div v-else>
         <Dropdown v-if="item.children && item.children.length > 1" placement="right-start">
-          <MenuItem :name="index">
-          <Icon custom="iconfont icon-integral" />
+          <MenuItem :name="item.path">
+            <Icon custom="iconfont icon-integral" />
           </MenuItem>
           <DropdownMenu slot="list">
             <DropdownItem v-for="(child, childIndex) in item.children" :key="childIndex">
@@ -41,7 +44,8 @@
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
-        <MenuItem v-else :name="item.path" v-show="!item.hidden" :to="item">
+        <MenuItem v-else :name="item.path" v-show="!item.hidden" :to="item.path"
+        :class="$route.path === item.path && 'ivu-menu-item ivu-menu-item-active ivu-menu-item-selected'">
         <Icon type="md-document" />
         </MenuItem>
       </div>

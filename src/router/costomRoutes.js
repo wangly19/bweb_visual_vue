@@ -4,13 +4,15 @@
 import Main from '../views/Layout/Home.vue'
 
 export default [{
-    path: '/',
+    path: '/desktop',
     name: '首页',
+    icon: '',
     component: Main,
     redirect: '/desktop',
     children: [{
       path: '/desktop',
       name: '首页',
+      icon: '',
       component: () => import('@/views/Dashboard')
     }]
   },
@@ -18,21 +20,24 @@ export default [{
     path: '/machine',
     name: '设备',
     component: Main,
-    redirect: '/machine/index',
+    redirect: '/machine',
     children: [{
-      path: 'index',
+      path: '/machine',
       name: '设备',
+      icon: '',
       component: () => import('@/views/Machine')
     }]
   },
   {
     path: '/gis',
     name: 'GIS',
-    redirect: '/gis/index',
+    redirect: '/gis',
     component: Main,
+    icon: '',
     children: [{
-      path: 'index',
+      path: '/gis',
       name: 'GIS',
+      icon: '',
       component: () => import('@/views/GIS')
     }]
   },
@@ -40,9 +45,11 @@ export default [{
     path: '/about',
     name: '关于',
     component: Main,
+    icon: '',
     children: [{
       path: '/about/a1',
       name: '关于',
+      icon: '',
       component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
     }]
   },

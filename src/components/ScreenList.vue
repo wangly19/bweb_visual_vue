@@ -45,7 +45,7 @@ export default {
     bindEmpty() {
     },
     bindOpen() {
-      this.$emit('onOpenDialog', false)
+      this.$emit('onOpenDialog', true)
     }
   }
 }

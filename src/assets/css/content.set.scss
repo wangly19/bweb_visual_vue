@@ -6,12 +6,12 @@
 
 // 默认填充宽度
 .w-width{
-    width: 100% !important;
+    width: 100%;
 }
 
 // 默认填充高度
 .w-height{
-    height: 100% !important;
+    height: 100%;
 }
 
 // 设置flex布局
@@ -98,6 +98,6 @@
 
 .scroll{
    overflow-x: hidden;
-   overflow-y: auto;
-   height: 100vh !important;
+   overflow-y: scroll;
+   max-height: 95vh;
 }

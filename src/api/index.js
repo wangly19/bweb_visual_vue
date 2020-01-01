@@ -8,11 +8,12 @@ import Axios from 'axios'
 import { getLocalStroage } from '../tools/loaclStroage'
 
 const service = Axios.create({
-  //  1111
-  baseURL: 'http://wangly.com:8080', // 基础AI
+  // Axios config base
+  baseURL: 'http://wangly.com:8080', // 基础URL
   timeout: 8000 // 请求超时时间，
 })
 
+// 拦截器
 service.interceptors.request.use(cfg => {
   const _TOKEN = getLocalStroage('token')
   if (_TOKEN) {

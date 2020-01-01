@@ -5,6 +5,7 @@ const Random = Mock.Random
 // 定义请求url
 const __URL = 'http://wangly.com:8080'
 
+// 登录数据
 const loginData = () => {
   return {
     token: Random.string(60), //  生成token
@@ -13,6 +14,7 @@ const loginData = () => {
   }
 }
 
+// 当前用户信息数据
 const userInfo = () => {
   return {
     name: 'wangly',
@@ -24,6 +26,7 @@ const userInfo = () => {
   }
 }
 
+// 卡片数据
 const cardData = {
   'list|4': [{
     'id|+1': [1, 2, 3, 4],
@@ -55,6 +58,31 @@ const cardData = {
   }]
 }
 
+// 设备
+const deviceData = (config) => {
+  const pageSize = JSON.parse(config.body).pageSize
+  let list = []
+  for (let i = 0; i < pageSize; i++) {
+    list.push({
+      id: i + 1,
+      gbid: Random.integer(10000, 1000000),
+      name: Random.csentence(3, 5),
+      scope: Random.csentence(3, 5),
+      monad: Random.csentence(3, 5),
+      type: '高消耗',
+      status: Random.integer(0, 1),
+      address: Random.csentence(9, 20)
+    })
+  }
+  return {
+    status: true,
+    statusText: '请求成功',
+    pageSize: pageSize,
+    total: Random.integer(100, 300),
+    list
+  }
+}
 Mock.mock(`${__URL}/api/login`, 'post', loginData)
 Mock.mock(`${__URL}/api/userinfo`, 'post', userInfo)
 Mock.mock(`${__URL}/api/card/list`, 'get', cardData)
+Mock.mock(`${__URL}/api/device/list`, 'get', deviceData)

@@ -1,9 +1,12 @@
  <template>
-   <div class="table-container w-bg-white w-height w-p-0">
-     <div class="maching-wrapper  w-height">
+   <div class="table-container w-bg-white w-p-0">
+     <div class="maching-wrapper">
        <Table :columns="columns1" :data="data1" ref="currentRowTable" :loading="loading" stripe class="w-height" tooltip-theme="dark">
          <template slot="header">
            <w-screens :screenConfig="screenConfig" @onSearchData="backSerachData" @onOpenDialog="backOpenDialog"></w-screens>
+         </template>
+         <template slot-scope="{ row }" slot="status">
+           <span>{{row.status === 0 ? '离线' : '在线'}}</span>
          </template>
          <template slot-scope="{ row, index }" slot="action">
            <Button type="primary" size="small" style="margin-right: 0.3125rem;" @click="show(index)">详情</Button>
@@ -18,34 +21,75 @@
              </DropdownMenu>
            </Dropdown>
          </template>
-         <template slot="footer">
-            <w-pages @castCurrent="backCurrent" @castPageSize="backPageSize" :total="total" :limit="limit" :currentPage="currentPage"></w-pages>
-         </template>
        </Table>
+       <w-pages @castCurrent="backCurrent" @castPageSize="backPageSize" :total="total" :limit="limit" :currentPage="currentPage"></w-pages>
      </div>
-     <Modal
-        v-model="machDialog"
-        title="Common Modal dialog box title"
-        @on-ok="ok"
-        @on-cancel="cancel">
-        <p>Content of dialog</p>
-        <p>Content of dialog</p>
-        <p>Content of dialog</p>
-    </Modal>
+     <Modal v-model="machDialog" title="添加新设备" ok-text="提交" @on-ok="submit" @on-cancel="cancel">
+       <div class="dialog-body">
+         <Form ref="form" v-model="form" :label-width="80" :rules="rules">
+           <Row :gutter="30">
+             <Col :span="12">
+             <FormItem label="设备标识" prop="name">
+               <Input v-model="form.name" placeholder="Enter your name"></Input>
+             </FormItem>
+             </Col>
+             <Col :span="12">
+             <FormItem label="设备名称" prop="name">
+               <Input v-model="form.name" placeholder="Enter your name"></Input>
+             </FormItem>
+             </Col>
+           </Row>
+           <Row :gutter="30">
+             <Col :span="12">
+             <FormItem label="所属范围" prop="name">
+               <Input v-model="form.name" placeholder="Enter your name"></Input>
+             </FormItem>
+             </Col>
+             <Col :span="12">
+             <FormItem label="所属单位" prop="name">
+               <Input v-model="form.name" placeholder="Enter your name"></Input>
+             </FormItem>
+             </Col>
+           </Row>
+           <Row :gutter="30">
+             <Col :span="12">
+             <FormItem label="机器型号" prop="name">
+               <Input v-model="form.name" placeholder="Enter your name"></Input>
+             </FormItem>
+             </Col>
+             <Col :span="12">
+             <FormItem label="当前状态" prop="name">
+               <Input v-model="form.name" placeholder="Enter your name"></Input>
+             </FormItem>
+             </Col>
+           </Row>
+           <FormItem label="信息反馈">
+             <Input v-model="form.textarea" type="textarea" :autosize="{minRows: 5,maxRows: 5}" placeholder="Enter something..."></Input>
+           </FormItem>
+         </Form>
+       </div>
+     </Modal>
    </div>
  </template>
  <script>
    import Pages from '@/components/Paging'
    import ScreenList from '@/components/ScreenList'
+   import { getDeviceList } from '@/api/device'
    export default {
      name: 'machine',
      data() {
        return {
-         total: 52,
+         total: 0,
          limit: 10,
          currentPage: 1,
          loading: false,
          machDialog: false,
+         form: {},
+         rules: {
+           name: [
+             { required: true, message: '请输入', trigger: 'blur' }
+           ]
+         },
          screenConfig: [{
            name: 'titleValue',
            info: '请输入设备号',
@@ -70,31 +114,34 @@
          columns1: [
          {
            title: '设备标识',
-           key: 'address'
+           key: 'gbid'
          },
-          {
+         {
            title: '设备名称',
            key: 'name'
          },
          {
            title: '所属范围',
-           key: 'age'
+           key: 'scope'
          },
          {
            title: '所属单位',
-           key: 'address'
+           key: 'monad'
          },
          {
            title: '机器/型号',
-           key: 'address'
+           key: 'type'
          },
          {
            title: '状态',
-           key: 'age'
+           key: 'status',
+           slot: 'status'
          },
          {
            title: '反馈信息',
-           key: 'address'
+           key: 'address',
+           ellipsis: true,
+           tooltip: true
          },
          {
            title: '操作',
@@ -102,98 +149,53 @@
            width: 150,
            align: 'center'
          }],
-         data1: [{
-           name: 'John Brown',
-           age: 18,
-           address: 'New York No. 1 Lake Park',
-           date: '2016-10-03'
-         },
-         {
-           name: 'Jim Green',
-           age: 24,
-           address: 'London No. 1 Lake Park',
-           date: '2016-10-01'
-         },
-         {
-           name: 'Joe Black',
-           age: 30,
-           address: 'Sydney No. 1 Lake Park',
-           date: '2016-10-02'
-         },
-         {
-           name: 'Jon Snow',
-           age: 26,
-           address: 'Ottawa No. 2 Lake Park',
-           date: '2016-10-04'
-         },
-         {
-           name: 'Jon Snow',
-           age: 26,
-           address: 'Ottawa No. 2 Lake Park',
-           date: '2016-10-04'
-         },
-         {
-           name: 'Jon Snow',
-           age: 26,
-           address: 'Ottawa No. 2 Lake Park',
-           date: '2016-10-04'
-         },
-         {
-           name: 'Jon Snow',
-           age: 26,
-           address: 'Ottawa No. 2 Lake Park',
-           date: '2016-10-04'
-         },
-         {
-           name: 'Jon Snow',
-           age: 26,
-           address: 'Ottawa No. 2 Lake Park',
-           date: '2016-10-04'
-         },
-         {
-           name: 'Jon Snow',
-           age: 26,
-           address: 'Ottawa No. 2 Lake Park',
-           date: '2016-10-04'
-         },
-         {
-           name: 'Jon Snow',
-           age: 26,
-           address: 'Ottawa No. 2 Lake Park',
-           date: '2016-10-04'
-         }]
+         data1: []
        }
      },
      methods: {
        handleClearCurrentRow() {
          this.$refs.currentRowTable.clearCurrentRow()
        },
+       // 回调当前页
        backCurrent(data) {
          console.log(data)
          this.Pages = data
-         this.loading = true
-         setTimeout(() => {
-           this.loading = false
-         }, 3000)
+         this.request()
        },
+       // 回调分页组件数量
        backPageSize(data) {
          this.limit = data
-         console.log(data)
-         this.loading = true
-         setTimeout(() => {
-           this.loading = false
-         }, 3000)
+         this.request()
        },
+       // 回调查询条件数据
        backSerachData(data) {
          console.log(data)
        },
+       // 打开对话框方法
        backOpenDialog(Bool) {
-         this.machDialog = Boolean
+         this.machDialog = Bool
+       },
+       // 对话框提交方法
+       submit() {},
+       // 对话框取消方法
+       cancel() {},
+       async request() {
+         this.loading = true
+         const { data } = await getDeviceList({
+           page: this.currentPage,
+           pageSize: this.limit
+         })
+         this.data1 = data.list
+         this.total = data.total
+         this.loading = false
        }
      },
      components: {
        'w-pages': Pages,
        'w-screens': ScreenList
+     },
+     created() {
+       this.request()
      }
    }
  </script>
@@ -203,7 +205,7 @@
    }
  </style>
  <style scoped>
-   .table-container >>> .ivu-table-header tr th{
+   .table-container>>>.ivu-table-header tr th {
      background: white;
    }
  </style>
