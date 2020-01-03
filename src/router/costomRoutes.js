@@ -4,7 +4,7 @@
 import Main from '../views/Layout/Home.vue'
 
 export default [{
-    path: '/desktop',
+    path: '/',
     name: '首页',
     icon: '',
     component: Main,

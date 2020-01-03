@@ -70,7 +70,7 @@
 </script>
 <template>
   <div class="login w-height">
-    <Row class="w-height">
+    <Row style="height: 100%;">
         <Col span="16" class="w-height">
           <Carousel v-model="start" class="w-height w-bg-try-1" ref="carouse">
               <CarouselItem>

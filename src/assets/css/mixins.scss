@@ -24,3 +24,13 @@ $base-font-size: 16px;
 @function REM($px) {
 	@return #{$px / 16px}rem;
 }
+
+// 定位
+@mixin position($position: absolute, $top: initial, $right: initial, $bottom: initial, $left: initial, $zIndex: initial) {
+	position: $position;
+	top: $top;
+	right: $right;
+	bottom: $bottom;
+	left: $left;
+	z-index: $zIndex;
+}

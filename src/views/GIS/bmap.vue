@@ -25,6 +25,11 @@ export default {
   components: {
     'baidu-map': BMAP,
     BmGeolocation
+  },
+  watch: {
+    gravity(newValue, oldValue) {
+      console.log(newValue, oldValue)
+    }
   }
 }
 </script>
@@ -32,7 +37,7 @@ export default {
 @import '@/assets/css/mixins';
 .bmap-wrapper{
   .map-view{
-    height: 95%;
+    height: 100%;
     width: 100%;
   }
 }

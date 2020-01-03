@@ -30,7 +30,7 @@ export default {
   props: {
     screenConfig: {
       type: Array,
-      default: null
+      Default: []
     }
   },
   data() {

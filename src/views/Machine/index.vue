@@ -24,7 +24,7 @@
        </Table>
        <w-pages @castCurrent="backCurrent" @castPageSize="backPageSize" :total="total" :limit="limit" :currentPage="currentPage"></w-pages>
      </div>
-     <Modal v-model="machDialog" title="添加新设备" ok-text="提交" @on-ok="submit" @on-cancel="cancel">
+     <Modal v-model="machDialog" title="添加新设备" @on-ok="submit('form')" @on-cancel="cancel('form')" :loading="dialogld">
        <div class="dialog-body">
          <Form ref="form" v-model="form" :label-width="80" :rules="rules">
            <Row :gutter="30">
@@ -68,6 +68,10 @@
            </FormItem>
          </Form>
        </div>
+       <template slot="footer">
+         <Button type="text" @click="cancel('form')">取消</Button>
+         <Button type="primary" @click="submit('form')">提交</Button>
+       </template>
      </Modal>
    </div>
  </template>
@@ -84,6 +88,7 @@
          currentPage: 1,
          loading: false,
          machDialog: false,
+         dialogld: true,
          form: {},
          rules: {
            name: [
@@ -170,15 +175,27 @@
        // 回调查询条件数据
        backSerachData(data) {
          console.log(data)
+         this.request()
        },
        // 打开对话框方法
        backOpenDialog(Bool) {
          this.machDialog = Bool
        },
        // 对话框提交方法
-       submit() {},
+       submit(name) {
+         this.dialogld = true
+         this.$refs[name].validate((valid) => {
+          if (valid) {
+            this.$Message.success('Success!')
+          } else {
+            this.dialogld = false
+            }
+          })
+       },
        // 对话框取消方法
-       cancel() {},
+       cancel(name) {
+         this.$refs[name].resetFields()
+       },
        async request() {
          this.loading = true
          const { data } = await getDeviceList({
