@@ -3,12 +3,11 @@ import VueRouter from 'vue-router'
 import costomRoutes from './costomRoutes'
 Vue.use(VueRouter)
 
-const routes = costomRoutes
-
-const router = new VueRouter({
+const createRouter = () => new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+  routes: costomRoutes
 })
+
+const router = createRouter()
 
 export default router

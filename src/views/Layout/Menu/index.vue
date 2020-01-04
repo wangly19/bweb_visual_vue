@@ -1,54 +1,33 @@
 <template>
-  <Menu theme="light" width="auto" class="menu-item" :class="isCollapse && 'collapsed-menu'" :accordion="true"
-  :active-name="$route.path"
-  style="height: calc(100% - 53px);">
-    <div v-for="(item,index) in router" :key="index">
-      <div class="is-collap" v-if="!isCollapse">
-        <Submenu v-if="item.children && item.children.length > 1" :name="item.path" :to="item.path">
-          <template slot="title">
-            <Icon type="ios-navigate"></Icon>
-            {{item.name}}
-          </template>
-          <div v-for="(child, childIndex) in item.children" :key="childIndex">
-            <Submenu v-if="child.children" :name="child.path" :to="child.path">
-              <template slot="title">
-                <Icon type="ios-navigate"></Icon>
-                {{child.name}}
-              </template>
-            </Submenu>
-            <div v-else>
-              <MenuItem :name="childIndex" :to="child.path">
-              <Icon type="md-document" />
-              {{child.name}}
-              </MenuItem>
-            </div>
-          </div>
-        </Submenu>
-        <MenuItem v-else :name="item.path" v-show="!item.hidden" :to="item.path"
-        :class="$route.path === item.path && 'ivu-menu-item ivu-menu-item-active ivu-menu-item-selected'">
-        <Icon type="md-document" />
-        {{item.name}}
-        </MenuItem>
-      </div>
-      <div v-else>
-        <Dropdown v-if="item.children && item.children.length > 1" placement="right-start">
-          <MenuItem :name="item.path">
-            <Icon custom="iconfont icon-integral" />
+  <Menu theme="light" width="auto" class="menu-item w-height" :class="isCollapse ? 'collapsed-menu w-align-center' : 'w-align-left'" :accordion="true" :active-name="$route.name" :open-names="[$route.meta.parent]">
+    <div v-for="(item, index) in router" :key="index">
+      <!-- 单个模块 -->
+      <MenuItem v-if="item.children && item.children.length <= 1 && !item.hidden && !isCollapse" :name="item.name" :to="item.path"
+      :class="$route.name === item.children[0].name && 'ivu-menu-item-active ivu-menu-item-selected'">
+        <i class="iconfont ivh-icon w-ft-4" :class="item.children[0].meta.icon"></i>
+        <span v-show="!isCollapse">{{item.children[0].meta.title}}</span>
+      </MenuItem>
+      <!-- 子模块 -->
+      <Submenu v-else-if="!item.hidden && !isCollapse" :name="item.name">
+        <template slot="title">
+          <span>
+            <i class="iconfont ivh-icon w-ft-4" :class="item.meta.icon"></i>
+            {{item.meta.title}}
+          </span>
+        </template>
+        <MenuItem v-for="child in item.children" :key="child.name" :name="child.name" :to="`${item.path}/${child.path}`">{{child.meta.title}}</MenuItem>
+      </Submenu>
+      <Dropdown trigger="click" v-if="isCollapse && !item.hidden" placement="right">
+          <MenuItem :name="item.name" :to="item.path"
+          :class="$route.name === item.children[0].name && 'ivu-menu-item-active ivu-menu-item-selected'">
+            <i class="iconfont ivh-icon" :class="item.children[0].meta.icon"></i>
           </MenuItem>
-          <DropdownMenu slot="list">
-            <DropdownItem v-for="(child, childIndex) in item.children" :key="childIndex">
-              <MenuItem :name="child.path" :to="child.path">
-              <Icon type="md-document" />
-              {{child.name}}
-              </MenuItem>
-            </DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
-        <MenuItem v-else :name="item.path" v-show="!item.hidden" :to="item.path"
-        :class="$route.path === item.path && 'ivu-menu-item ivu-menu-item-active ivu-menu-item-selected'">
-        <Icon type="md-document" />
-        </MenuItem>
-      </div>
+        <DropdownMenu slot="list" v-if="item.children && item.children.length > 1">
+          <DropdownItem>
+            <MenuItem v-for="child in item.children" :key="child.name" :name="child.name" :to="`${item.path}/${child.path}`">{{child.meta.title}}</MenuItem>
+          </DropdownItem>
+        </DropdownMenu>
+    </Dropdown>
     </div>
   </Menu>
 </template>
@@ -57,51 +36,19 @@
     props: {
       router: {
         type: Array,
-        default: null
+        Default: []
       },
       isCollapse: {
-        type: Boolean,
-        default: false
+        type: Boolean
       }
     }
   }
 </script>
 <style lang="scss">
-  .menu-item {
-    border: none;
-    span {
-      display: inline-block;
-      overflow: hidden;
-      width: 4.3125rem /* 69/16 */;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      vertical-align: bottom;
-      transition: width .2s ease .2s;
-    }
-
-    &.span:hover {
-      color: red;
-    }
-
-    i {
-      transform: translateX(0px);
-      transition: font-size .2s ease, transform .2s ease;
-      vertical-align: middle;
-      font-size: 1rem;
-    }
-  }
-
+@import '@/assets/css/mixins.scss';
   .collapsed-menu {
-    span {
-      width: 0px;
-      transition: width .2s ease;
-    }
-
     i {
-      transform: translateX(5px);
-      transition: font-size .2s ease .2s, transform .2s ease .2s;
-      vertical-align: middle;
-      font-size: 1.375rem /* 22/16 */;
+      font-size: REM(25px);
     }
   }
 </style>

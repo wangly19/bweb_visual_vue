@@ -1,58 +1,58 @@
-const asyncRoutes = [{
-    path: '/administrator',
-    name: '管理员',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Home'),
+import Main from '../views/Layout/Home.vue'
+const asyncRoutes = [
+  {
+    path: '/about',
+    name: 'about',
+    component: Main,
+    redirect: '/about/index',
+    children: [{
+      path: 'index',
+      name: 'about',
+      meta: {
+        title: '关于',
+        icon: 'icon-attachent'
+      },
+      component: () => import('../views/About')
+    }]
+  },
+  {
+    path: '/root',
+    name: 'root',
     meta: {
       title: '管理员板块',
-      roles: ['admin']
+      icon: 'icon-all',
+      roles: ['root', 'super']
     },
+    component: Main,
+    redirect: '/root/admin1',
     children: [{
         path: 'admin1',
-        name: '管理员1-1',
-        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+        name: 'admin1',
+        component: () => import('../views/About'),
         meta: {
           title: '表单管理',
-          roles: ['admin']
+          icon: 'icon-all',
+          roles: ['root', 'model'],
+          parent: 'root'
         }
       },
       {
         path: 'admin2',
         name: '管理员1-2',
-        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+        component: () => import('../views/About'),
         meta: {
           title: '用户管理',
-          roles: ['admin']
+          icon: 'icon-all',
+          roles: ['root'],
+          parent: 'root'
         }
       }
     ]
   },
   {
-    path: '/administrator1',
-    name: '管理员',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Home'),
-    meta: {
-      title: '管理员板块',
-      roles: ['admin']
-    },
-    children: [{
-        path: 'admin1',
-        name: '管理员1-1',
-        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-        meta: {
-          title: '表单管理',
-          roles: ['admin']
-        }
-      },
-      {
-        path: 'admin2',
-        name: '管理员1-2',
-        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-        meta: {
-          title: '用户管理',
-          roles: ['admin']
-        }
-      }
-    ]
+    path: '*',
+    redirect: '/404',
+    hidden: true
   }
 ]
 export default asyncRoutes

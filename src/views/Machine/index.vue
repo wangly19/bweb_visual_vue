@@ -24,7 +24,7 @@
        </Table>
        <w-pages @castCurrent="backCurrent" @castPageSize="backPageSize" :total="total" :limit="limit" :currentPage="currentPage"></w-pages>
      </div>
-     <Modal v-model="machDialog" title="添加新设备" @on-ok="submit('form')" @on-cancel="cancel('form')" :loading="dialogld">
+     <Modal v-model="machDialog" title="添加新设备" :loading="dialogld">
        <div class="dialog-body">
          <Form ref="form" v-model="form" :label-width="80" :rules="rules">
            <Row :gutter="30">
@@ -194,7 +194,7 @@
        },
        // 对话框取消方法
        cancel(name) {
-         this.$refs[name].resetFields()
+         this.machDialog = false
        },
        async request() {
          this.loading = true

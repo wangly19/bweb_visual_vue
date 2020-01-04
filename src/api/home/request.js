@@ -1,4 +1,4 @@
-import http from '../../api'
+import http from '@/api'
 
 const getMons = () => {
   return http({
@@ -20,8 +20,16 @@ const getCardList = () => {
     method: 'get'
   })
 }
+
+const putExit = () => {
+  return http({
+    url: '/api/exit',
+    method: 'get'
+  })
+}
 export {
   getMons,
   getInfo,
-  getCardList
+  getCardList,
+  putExit
 }

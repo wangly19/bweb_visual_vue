@@ -6,7 +6,7 @@
         <div class="right-group flex">
             <i class="iconfont icon-code w-ft-5 w-co-white w-m-right-1 mouse"></i>
             <i class="iconfont icon-connections w-ft-5 w-co-white w-m-right-1 mouse"></i>
-            <Dropdown trigger="click" class="w-m-right-1">
+            <Dropdown trigger="click" class="w-m-right-1" @on-click="selectDropdown">
                 <p class="mouse down-user">
                     <Avatar icon="ios-person" />
                     <span class="w-co-white w-height w-p-left-0">{{username}}</span>
@@ -15,7 +15,7 @@
                 <DropdownMenu slot="list">
                     <DropdownItem>修改资料</DropdownItem>
                     <DropdownItem>个人信息</DropdownItem>
-                    <DropdownItem>注销登录</DropdownItem>
+                    <DropdownItem name="exit">注销登录</DropdownItem>
                 </DropdownMenu>
             </Dropdown>
         </div>
@@ -37,6 +37,16 @@ export default {
         toggleMenu() {
             // 切换Menu状态
             this.$store.commit('_setCollapse', !this.$store.state.app.isCollapse)
+        },
+        async selectDropdown(name) {
+            if (name === 'exit') {
+                const state = await this.$store.dispatch('exitUser')
+                state && this.$router.replace('/login')
+                this.$Message[state ? 'success' : 'error']({
+                    background: true,
+                    content: state ? '退出成功' : '退出失败'
+                })
+            }
         }
     }
 }

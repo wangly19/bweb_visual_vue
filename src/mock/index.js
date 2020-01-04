@@ -19,7 +19,7 @@ const userInfo = () => {
   return {
     name: 'wangly',
     avatar: '',
-    roles: ['admin', 'super'],
+    roles: ['root', 'admin'],
     token: '',
     status: true,
     statusText: '请求成功'
@@ -82,7 +82,13 @@ const deviceData = (config) => {
     list
   }
 }
+
+const removeData = {
+  status: true,
+  statusText: '用户已退出'
+}
 Mock.mock(`${__URL}/api/login`, 'post', loginData)
+Mock.mock(`${__URL}/api/exit`, 'get', removeData)
 Mock.mock(`${__URL}/api/userinfo`, 'post', userInfo)
 Mock.mock(`${__URL}/api/card/list`, 'get', cardData)
 Mock.mock(`${__URL}/api/device/list`, 'get', deviceData)

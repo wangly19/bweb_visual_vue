@@ -25,14 +25,18 @@ const actions = {
      */
     init({ commit }, roles) {
         // 如果是超级管理员权限，默认拥有全部权限
-        let sendRoutes = []
-        if (roles.includes('admin')) {
-            sendRoutes = asyncRoutes
-        } else {
-            // 循环异步路由进行权限判断，筛选符合条件的路由
-            sendRoutes = filterRoutes(asyncRoutes, roles)
-        }
-        commit('_setRoutes', sendRoutes)
+       return new Promise(resolve => {
+            let sendRoutes = []
+            if (roles.includes('admin')) {
+                console.log(roles, true)
+                sendRoutes = asyncRoutes || []
+            } else {
+                // 循环异步路由进行权限判断，筛选符合条件的路由
+                sendRoutes = filterRoutes(asyncRoutes, roles)
+            }
+            commit('_setRoutes', sendRoutes)
+            resolve(sendRoutes)
+       })
     }
 }
 
@@ -41,7 +45,7 @@ const actions = {
  * @param { array } route => 路由列表
  * @param { array } roles => 权限数组
  */
-function hasRoles(route, roles) {
+export function hasRoles(route, roles) {
     // 如果路由存在meta字段，并且拥有roles
     if (route.meta && route.meta.roles) {
         // some帅选条件
@@ -55,15 +59,17 @@ function hasRoles(route, roles) {
  * @param {array} routes => 路由数组
  * @param {array} roles => 权限数组
  */
-function filterRoutes(routes, roles) {
-    console.log(routes)
+export function filterRoutes(routes, roles) {
     let result = []
     routes.forEach(element => {
-        const temp = { ...element }
-         if (hasRoles(temp, roles)) {
-            if (temp.children) temp.children = filterRoutes(temp.children, roles)
+        let temp = { ...element }
+        console.log(hasRoles(temp, roles), 'filter')
+        if (hasRoles(temp, roles)) {
+            if (temp.children) {
+                temp.children = filterRoutes(temp.children, roles)
+            }
+            result.push(temp)
         }
-        result.push(temp)
     })
     return result
 }

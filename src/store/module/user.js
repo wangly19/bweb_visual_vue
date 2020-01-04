@@ -1,5 +1,5 @@
-import { getMons, getInfo } from '@/api/home/request'
-import { setLocalStroage } from '../../tools/loaclStroage'
+import { getMons, getInfo, putExit } from '@/api/home/request'
+import { setLocalStroage, getLocalStroage, removeLocalStroage } from '../../tools/loaclStroage'
 
 const state = {
     token: '', // token
@@ -38,15 +38,25 @@ const actions = {
      * @param {method} commit => commit事件
      * @param {*} token => 登录后的token
      */
-    getUserinfo({ commit }, token) {
-        return new Promise((resolve, reject) => {
+    getUserinfo({ commit }) {
+        return new Promise((resolve) => {
             getInfo().then(res => {
-                console.log(res)
-                commit('_setToken', res.data.token)
+                commit('_setToken', getLocalStroage('token'))
                 commit('_setName', res.data.name)
                 commit('_setRoles', res.data.roles)
                 commit('_setAvatar', res.data.avatar)
+                resolve(res.data)
             })
+        })
+    },
+    exitUser({ commit }) {
+        return new Promise(async resolve => {
+            const { data } = await putExit()
+            if (data.status) {
+                commit('_setToken', '')
+                removeLocalStroage('token')
+                resolve(true)
+            }
         })
     }
 }
