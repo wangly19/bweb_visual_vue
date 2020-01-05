@@ -1,5 +1,10 @@
 <template>
   <div class="main w-height">
+    <Drawer title="应用设置面板" :closable="false" :value="true">
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+    </Drawer>
     <Layout class="w-height">
       <Layout>
         <!-- 侧边栏选项卡 -->

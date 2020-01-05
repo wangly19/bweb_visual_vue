@@ -49,12 +49,14 @@
             that.isLoading = true
             // 验证成功了，开始做登录事件
             const { data } = await this.$store.dispatch('login', this.loginForm)
-            this.$Message[data.status ? 'success' : 'error']({
-              background: true,
-              content: `tip: ${data.statusText}`
-            })
-            data.status ? this.$router.replace({ path: '/' }) : '' // 替换路由为首页
-            this.isLoading = false
+            setTimeout(() => {
+              this.$Message[data.status ? 'success' : 'error']({
+                background: true,
+                content: `tip: ${data.statusText}`
+              })
+              data.status ? this.$router.replace({ path: '/' }) : '' // 替换路由为首页
+              this.isLoading = false
+            }, 1000)
           } else return false
         })
       },
@@ -66,7 +68,6 @@
       ...mapActions(['login'])
     }
   }
-
 </script>
 <template>
   <div class="login w-height">
@@ -88,12 +89,12 @@
           <Form :model="loginForm" :rules="rules" ref="loginCheck" class="w-width w-p-6 w-align-center">
             <FormItem prop="name">
               <Input type="text" v-model="loginForm.name" size="large" clearable placeholder="请输入用户账号">
-                  <Icon type="ios-person-outline" slot="prepend"></Icon>
+                  <Icon type="md-contact" slot="prepend" style="font-size: 25px;"></Icon>
               </Input>
             </FormItem>
             <FormItem prop="password">
               <Input type="password" v-model="loginForm.password" size="large" password clearable placeholder="请输入用户密码">
-                <Icon type="ios-lock-outline" slot="prepend"></Icon>
+                  <Icon type="md-lock" slot="prepend" style="font-size: 25px;"></Icon>
             </Input>
             </FormItem>
             <FormItem class="w-align-left">
