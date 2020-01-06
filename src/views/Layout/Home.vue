@@ -15,9 +15,11 @@
         <Layout class="w-height">
           <w-header :username="name"></w-header>
           <Content class="w-p-1 w-height scroll">
+            <transition :name="transitionName">
             <keep-alive>
               <router-view></router-view>
             </keep-alive>
+          </transition>
           </Content>
         </Layout>
       </Layout>
@@ -34,7 +36,8 @@
   export default {
     data() {
       return {
-        logoHieght: 53
+        logoHieght: 53,
+        transitionName: 'slide-left'
       }
     },
     components: {
@@ -52,3 +55,15 @@
     }
   }
 </script>
+<style lang="scss" scoped>
+.slide-left-enter, .slide-right-leave-active {
+    opacity: 0;
+    -webkit-transform: translate(100%, 0);
+    transform: translate(100%, 0);
+}
+.slide-left-leave-active, .slide-right-enter {
+    opacity: 0;
+    -webkit-transform: translate(-100%, 0);
+    transform: translate(-100%, 0);
+}
+</style>

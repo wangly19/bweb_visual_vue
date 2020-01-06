@@ -26,11 +26,11 @@
      </div>
      <Modal v-model="machDialog" title="添加新设备" :loading="dialogld">
        <div class="dialog-body">
-         <Form ref="form" v-model="form" :label-width="80" :rules="rules">
+         <Form ref="form" v-model="form" :label-width="80">
            <Row :gutter="30">
              <Col :span="12">
-             <FormItem label="设备标识" prop="name">
-               <Input v-model="form.name" placeholder="Enter your name"></Input>
+             <FormItem label="设备标识" prop="gbid">
+               <Input v-model="form.gbid" placeholder="Enter your name"></Input>
              </FormItem>
              </Col>
              <Col :span="12">
@@ -41,29 +41,29 @@
            </Row>
            <Row :gutter="30">
              <Col :span="12">
-             <FormItem label="所属范围" prop="name">
-               <Input v-model="form.name" placeholder="Enter your name"></Input>
+             <FormItem label="所属范围" prop="scope">
+               <Input v-model="form.scope" placeholder="Enter your name"></Input>
              </FormItem>
              </Col>
              <Col :span="12">
-             <FormItem label="所属单位" prop="name">
-               <Input v-model="form.name" placeholder="Enter your name"></Input>
+             <FormItem label="所属单位" prop="monad">
+               <Input v-model="form.monad" placeholder="Enter your name"></Input>
              </FormItem>
              </Col>
            </Row>
            <Row :gutter="30">
              <Col :span="12">
-             <FormItem label="机器型号" prop="name">
-               <Input v-model="form.name" placeholder="Enter your name"></Input>
+             <FormItem label="机器型号" prop="type">
+               <Input v-model="form.type" placeholder="Enter your name"></Input>
              </FormItem>
              </Col>
              <Col :span="12">
-             <FormItem label="当前状态" prop="name">
-               <Input v-model="form.name" placeholder="Enter your name"></Input>
+             <FormItem label="当前状态" prop="status">
+               <Input v-model="form.status" placeholder="Enter your name"></Input>
              </FormItem>
              </Col>
            </Row>
-           <FormItem label="信息反馈">
+           <FormItem label="信息描述">
              <Input v-model="form.textarea" type="textarea" :autosize="{minRows: 5,maxRows: 5}" placeholder="Enter something..."></Input>
            </FormItem>
          </Form>
@@ -91,8 +91,23 @@
          dialogld: true,
          form: {},
          rules: {
+           gbid: [
+             { required: true, message: '请输入GBID', trigger: 'blur' }
+           ],
            name: [
-             { required: true, message: '请输入', trigger: 'blur' }
+             { required: true, message: '请输入设备名称', trigger: 'blur' }
+           ],
+           scope: [
+             { required: true, message: '请选择设备范围', trigger: 'blur' }
+           ],
+           monad: [
+             { required: true, message: '请选择所在单位', trigger: 'blur' }
+           ],
+           type: [
+             { required: true, message: '请选择设备类型', trigger: 'blur' }
+           ],
+           status: [
+             { required: true, message: '请选择设备状态', trigger: 'blur' }
            ]
          },
          screenConfig: [{
@@ -183,8 +198,9 @@
        },
        // 对话框提交方法
        submit(name) {
+         console.log(name)
          this.dialogld = true
-         this.$refs[name].validate((valid) => {
+         this.$refs['form'].validate((valid) => {
           if (valid) {
             this.$Message.success('Success!')
           } else {
@@ -194,6 +210,7 @@
        },
        // 对话框取消方法
        cancel(name) {
+         this.$refs[name].resetFields()
          this.machDialog = false
        },
        async request() {
