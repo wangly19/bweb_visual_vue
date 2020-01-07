@@ -55,6 +55,12 @@ export default [{
     component: () => import('../views/Login')
   },
   {
+    path: '/dashview',
+    name: '重新请求',
+    hidden: true,
+    component: () => import('@/components/DashView')
+  },
+  {
     path: '/404',
     name: '错误警告',
     component: () => import('@/views/404'),

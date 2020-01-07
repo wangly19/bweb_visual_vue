@@ -6,7 +6,7 @@
            <w-screens :screenConfig="screenConfig" @onSearchData="backSerachData" @onOpenDialog="backOpenDialog"></w-screens>
          </template>
          <template slot-scope="{ row }" slot="status">
-           <span>{{row.status === 0 ? '离线' : '在线'}}</span>
+           <Tag :color="row.status === 0 ? 'error' : 'success'">{{row.status === 0 ? '离线' : '在线'}}</Tag>
          </template>
          <template slot-scope="{ row, index }" slot="action">
            <Button type="primary" size="small" style="margin-right: 0.3125rem;" @click="show(index)">详情</Button>
@@ -24,9 +24,9 @@
        </Table>
        <w-pages @castCurrent="backCurrent" @castPageSize="backPageSize" :total="total" :limit="limit" :currentPage="currentPage"></w-pages>
      </div>
-     <Modal v-model="machDialog" title="添加新设备" :loading="dialogld">
+     <Modal v-model="machDialog" title="添加新设备">
        <div class="dialog-body">
-         <Form ref="form" v-model="form" :label-width="80">
+         <Form ref="form" :model="form" :label-width="80" :rules="rules">
            <Row :gutter="30">
              <Col :span="12">
              <FormItem label="设备标识" prop="gbid">
@@ -198,13 +198,11 @@
        },
        // 对话框提交方法
        submit(name) {
-         console.log(name)
-         this.dialogld = true
          this.$refs['form'].validate((valid) => {
           if (valid) {
             this.$Message.success('Success!')
           } else {
-            this.dialogld = false
+            return false
             }
           })
        },
