@@ -47,6 +47,11 @@
       this.$nextTick(() => {
         this.logoHieght = this.$refs.logo.$el.offsetHeight
       })
+    },
+    watch: {
+      logoHieght(val) {
+        console.log(val)
+      }
     }
   }
 </script>

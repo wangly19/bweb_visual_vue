@@ -1,6 +1,38 @@
 import Main from '../views/Layout/Home.vue'
 const asyncRoutes = [
   {
+    path: '/machine',
+    name: 'machine',
+    component: Main,
+    meta: {
+      icon: 'icon-lights',
+      title: '总设备',
+      roles: ['town']
+    },
+    redirect: '/machine/index',
+    children: [{
+      path: 'index',
+      name: 'machine',
+      meta: {
+        title: '总设备',
+        icon: 'icon-lights',
+        roles: ['root']
+      },
+      component: () => import('@/views/Machine')
+    },
+    {
+      path: 'warning',
+      name: 'warnDevice',
+      meta: {
+        title: '警告设备',
+        icon: 'icon-lights',
+        roles: ['town']
+      },
+      component: () => import('@/views/Machine/warning')
+    }
+  ]
+  },
+  {
     path: '/about',
     name: 'about',
     component: Main,

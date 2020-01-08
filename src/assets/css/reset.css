@@ -5,7 +5,7 @@ html {
     background-color: #fff; /*默认白底*/
     color: #000; /*默认黑字*/
     font-family: "PingFang SC";
-    font-size: 16px !important;
+    font-size: 100px !important;
     overflow: hidden;
 }
 body,

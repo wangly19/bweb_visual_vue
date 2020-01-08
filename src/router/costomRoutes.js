@@ -19,21 +19,6 @@ export default [{
     }]
   },
   {
-    path: '/machine',
-    name: 'machine',
-    component: Main,
-    redirect: '/machine/index',
-    children: [{
-      path: 'index',
-      name: 'machine',
-      meta: {
-        title: '设备',
-        icon: 'icon-lights'
-      },
-      component: () => import('@/views/Machine')
-    }]
-  },
-  {
     path: '/gis',
     name: 'gis',
     redirect: '/gis/index',

@@ -8,15 +8,15 @@
     <Row :gutter="30" class="w-m-top-1 w-m-bottom-1">
       <Col span="18">
         <Card>
-          <div style="text-align:center">
-            <div ref="line" id="line" style="width:100%;height: 18.75rem;padding: 0;"></div>
+          <div class="w-align-center">
+            <div ref="line" id="line"></div>
           </div>
         </Card>
       </Col>
       <Col span="6">
         <Card>
           <div style="text-align:center">
-            <div id="consume" ref="consume" style="height: 18.75rem; width: 100%;padding: 0;"></div>
+            <div id="consume" ref="consume"></div>
           </div>
         </Card>
       </Col>
@@ -26,14 +26,18 @@
         <Card class="update-device">
           <div slot="title" class="title">
             <span>归属单位</span>
+            <span>本周</span>
             <span>本月</span>
             <span>本季度</span>
+            <span>本年</span>
           </div>
             <ul class="bash-body">
               <li v-for="item in 5" :key="item">
                 <span>华南理工大学</span>
                 <span>29</span>
+                <span>35</span>
                 <span>47</span>
+                <span>147</span>
               </li>
             </ul>
         </Card>
@@ -127,6 +131,19 @@
     padding-left: REM(10px);
     border-left: REM(5px) solid $greey-1;
   }
+  // 图表line
+  #line{
+    width:100%;
+    height: REM(300px);
+    padding: 0;
+  }
+
+  #consume{
+    width:100%;
+    height: REM(300px);
+    padding: 0;
+  }
+
   // 实时列表
   .wraning-list{
     .wraning-item{
@@ -138,13 +155,10 @@
     .title, .bash-body li{
       padding-top: REM(2px);
       padding-bottom: REM(2px);
-      span:nth-child(1){
-        flex: 0 0 REM(100px);
-      }
-      span:nth-child(2){
-        flex: 0 0 REM(150px);
-      }
       @include flex($justify: space-btween);
+      span{
+        flex: 1;
+      }
     }
   }
   .bash-view{

@@ -1,7 +1,7 @@
  <template>
-   <div class="table-container w-bg-white w-p-0">
-     <div class="maching-wrapper">
-       <Table :columns="columns1" :data="data1" ref="currentRowTable" :loading="loading" stripe class="w-height" tooltip-theme="dark">
+   <div class="table-container w-bg-white w-p-0 w-height">
+     <div class="maching-wrapper w-bg-white">
+       <Table :columns="columns1" :data="data1" ref="currentRowTable" :loading="loading" stripe :height="780" tooltip-theme="dark">
          <template slot="header">
            <w-screens :screenConfig="screenConfig" @onSearchData="backSerachData" @onOpenDialog="backOpenDialog"></w-screens>
          </template>
@@ -9,7 +9,7 @@
            <Tag :color="row.status === 0 ? 'error' : 'success'">{{row.status === 0 ? '离线' : '在线'}}</Tag>
          </template>
          <template slot-scope="{ row, index }" slot="action">
-           <Button type="primary" size="small" style="margin-right: 0.3125rem;" @click="show(index)">详情</Button>
+           <Button type="primary" size="small" class="w-m-right-0" @click="show(index)">详情</Button>
            <Dropdown trigger="click">
              <Button type="success" class="" size="small" @click="remove(index)">更多</Button>
              <DropdownMenu slot="list">
@@ -179,7 +179,7 @@
        // 回调当前页
        backCurrent(data) {
          console.log(data)
-         this.Pages = data
+         this.currentPage = data
          this.request()
        },
        // 回调分页组件数量
@@ -232,12 +232,10 @@
    }
  </script>
  <style lang="scss" scoped>
-   .table-container {
-     .ivu-table-wrapper {}
-   }
+ @import '@/assets/css/mixins.scss';
  </style>
  <style scoped>
-   .table-container>>>.ivu-table-header tr th {
-     background: white;
-   }
+.table-container>>>.ivu-table-header tr th {
+  background: white;
+}
  </style>

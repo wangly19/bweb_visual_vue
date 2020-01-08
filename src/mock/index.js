@@ -19,8 +19,7 @@ const userInfo = () => {
   return {
     name: 'wangly',
     avatar: '',
-    roles: ['root', 'admin'],
-    token: '',
+    roles: ['province', 'ctiy', 'province', 'town', 'root'],
     status: true,
     statusText: '请求成功'
   }

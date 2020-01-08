@@ -280,7 +280,7 @@
       @include position($zIndex: 1, $right: 0);
       height: 100%;
       color: $white;
-      width: REM(250px);
+      width: REM(300px);
       background: rgba(255, 255, 255, .9);
 
       .close-tab {
@@ -338,7 +338,7 @@
 <style scoped>
   .gis-container .open-tabs>>>.ivu-icon {
     color: red;
-    font-size: 1.25rem
+    font-size: 25px;
       /* 20/16 */
     ;
   }

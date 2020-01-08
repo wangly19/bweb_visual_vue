@@ -15,6 +15,8 @@ import 'view-design/dist/styles/iview.css'
 Vue.use(viewUI)
 // 引入mock
 import './mock'
+// 引入适配js
+import '@/tools/setSize'
 
 Vue.config.productionTip = false
 
