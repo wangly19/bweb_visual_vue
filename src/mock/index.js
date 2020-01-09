@@ -58,7 +58,7 @@ const cardData = {
 }
 
 // 设备
-const deviceData = (config) => {
+const deviceData = config => {
   const pageSize = JSON.parse(config.body).pageSize
   let list = []
   for (let i = 0; i < pageSize; i++) {
@@ -82,6 +82,31 @@ const deviceData = (config) => {
   }
 }
 
+// 预警信息
+const warningData = config => {
+  const pageSize = JSON.parse(config.body).pageSize
+  let list = []
+  for (let i = 0; i < pageSize; i++) {
+    list.push({
+      id: i + 1,
+      gbid: Random.integer(10000, 1000000),
+      warnDevice: '供暖器',
+      garvity: Random.county(true),
+      createTime: Random.now('day', 'yyyy-MM-dd HH:mm'),
+      report: Random.cname(),
+      status: Random.integer(1, 4),
+      reportInfo: Random.sentence(6, 10)
+    })
+  }
+  return {
+    status: true,
+    statusText: '请求成功',
+    pageSize: pageSize,
+    total: Random.integer(13, 105),
+    list
+  }
+}
+
 const removeData = {
   status: true,
   statusText: '用户已退出'
@@ -91,3 +116,4 @@ Mock.mock(`${__URL}/api/exit`, 'get', removeData)
 Mock.mock(`${__URL}/api/userinfo`, 'post', userInfo)
 Mock.mock(`${__URL}/api/card/list`, 'get', cardData)
 Mock.mock(`${__URL}/api/device/list`, 'get', deviceData)
+Mock.mock(`${__URL}/api/device/warnlist`, 'get', warningData)

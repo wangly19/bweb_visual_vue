@@ -7,7 +7,14 @@ const getDeviceList = (data) => {
     data
   })
 }
-
+const getWarnList = data => {
+  return http({
+    url: '/api/device/warnlist',
+    method: 'get',
+    data
+  })
+}
 export {
-  getDeviceList
+  getDeviceList,
+  getWarnList
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="screen-wrapper">
-    <ul>
+    <ul v-if="screenConfig">
       <li v-for="(item, index) in screenConfig" :key="index" class="w-align-left w-m-right-0">
         <template v-if="item.isCascader">
           <Cascader :data="item.data" v-model="searchData[screenConfig[index].name]" :placeholder="item.info"/>
@@ -30,7 +30,7 @@ export default {
   props: {
     screenConfig: {
       type: Array,
-      Default: []
+      default: () => []
     }
   },
   data() {
