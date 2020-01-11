@@ -4,7 +4,9 @@
  * 获取存储节点
  * @param {string} where => 获取存储的item字段
  */
-const getLocalStroage = (where) => localStorage.getItem(where)
+const getLocalStroage = (where) => {
+  return localStorage.getItem(where)
+}
 
 /**
  * 设置存储值

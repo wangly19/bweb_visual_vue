@@ -20,9 +20,8 @@ $danger: #F94441;
 }
 
 // 转换REM函数
-$base-font-size: 100px;
 @function REM($px) {
-	@return #{$px / 100px}rem;
+	@return $px;
 }
 
 // 定位
