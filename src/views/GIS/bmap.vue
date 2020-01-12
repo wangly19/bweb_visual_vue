@@ -1,6 +1,8 @@
 <template>
   <div class="bmap-wrapper">
-    <baidu-map class="map-view" ak="8vQddtVMwTsx9MRdTAzHzlVViEa6w6Ej" :center="gravity" :scroll-wheel-zoom="true" @ready="readyMap">
+    <Spin size="large" fix v-if="!isMapLoadingSuccess"></Spin>
+    <baidu-map class="map-view" :ak="KEY" :center="gravity" :scroll-wheel-zoom="true" @ready="readyMap"
+    @load="loadingBaiduMap">
       <bm-geolocation anchor="BMAP_ANCHOR_BOTTOM_LEFT" :showAddressBar="true" :autoLocation="true" @locationSuccess="onPositionSuccess" :locationError="onPositionError" v-if="isMapLoadingSuccess"></bm-geolocation>
         <bm-marker :position="warnLocal"
         v-if="isMapLoadingSuccess"
@@ -32,6 +34,7 @@ export default {
   },
   data() {
     return {
+      KEY: '8vQddtVMwTsx9MRdTAzHzlVViEa6w6Ej',
       gravity: '北京',
       BMap: null,
       map: null,
@@ -48,10 +51,13 @@ export default {
     makerClick(type, target) {
       console.log('click ..', type, target)
     },
+    // 加载组件s
     readyMap({ BMap, map }) {
-      console.log(BMap, map)
       this.BMap = BMap
       this.map = map
+    },
+    // 逐渐加载方法
+    loadingBaiduMap() {
       this.isMapLoadingSuccess = true
     }
   },

@@ -99,5 +99,6 @@
 .scroll{
    overflow-x: hidden;
    overflow-y: scroll;
-   height: 100vh;
+   height: 100px;
+   box-sizing: border-box;
 }

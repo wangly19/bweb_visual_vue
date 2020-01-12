@@ -4,7 +4,7 @@
 html {
     background-color: #fff; /*默认白底*/
     color: #000; /*默认黑字*/
-    font-family: "PingFang SC";
+    font-family: Arial, "Microsoft Yahei", "Helvetica Neue", Helvetica, sans-serif;
     font-size: 16px !important;
     height: 100%;
     -webkit-tap-highlight-color: transparent;
@@ -193,10 +193,6 @@ hr {
     border-top: .02rem solid #cacaca;
 }
 
-a {
-    color: #25a4bb;
-    text-decoration: none;
-}
 /* 滚动槽 */
 ::-webkit-scrollbar {
     width: 6px;

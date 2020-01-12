@@ -1,7 +1,7 @@
  <template>
    <div class="table-container w-bg-white w-p-0 w-height">
      <div class="maching-wrapper w-bg-white">
-       <Table :columns="columns1" :data="data1" ref="currentRowTable" :loading="loading" stripe :height="780" tooltip-theme="dark">
+       <Table :columns="columns1" :data="data1" ref="currentRowTable" :loading="loading" stripe tooltip-theme="dark">
          <template slot="header">
            <w-screens :screenConfig="screenConfig" @onSearchData="backSerachData" @onOpenDialog="backOpenDialog"></w-screens>
          </template>

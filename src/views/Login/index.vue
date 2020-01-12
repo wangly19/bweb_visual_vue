@@ -6,7 +6,10 @@
     .slider-wrapper {
     @include flex($direction: column, $justify: space-around, $align: center);
     .logo{
-      i, span{
+      p{
+        i{
+          font-size: REM(30px);
+        }
         font-size: REM(30px);
       }
     }
@@ -110,7 +113,9 @@
       <Col span="16" class="w-height">
       <Carousel v-model="start" class="w-height w-bg-try-1" ref="carouse">
         <CarouselItem>
-          <div class="demo w-co-white">111</div>
+          <div class="demo w-co-white">
+            <img src="http://img.netbian.com/file/2018/0315/c945a2f105a803f14cfb695cca60bf2f.jpg" alt="">
+          </div>
         </CarouselItem>
       </Carousel>
       </Col>
@@ -118,7 +123,7 @@
         <div class="slider-wrapper w-height">
           <!-- 顶部Logo -->
           <div class="logo w-width w-align-left w-p-left-6">
-            <p><i class="iconfont icon-LOGO w-co-greey-1" /><span>水电气大数据可视化系统</span></p>
+            <p><i class="iconfont icon-LOGO w-co-greey-1"></i> 智能设备管理系统</p>
           </div>
           <!-- 登录表单 -->
           <Form :model="loginForm" :rules="rules" ref="loginCheck" class="w-width w-p-6 w-align-center">
