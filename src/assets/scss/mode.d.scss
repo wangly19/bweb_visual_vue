@@ -1,0 +1,56 @@
+// scss 布局模型
+@import '@/assets/scss/mixins.scss';
+
+/* 滚动条 */
+.scroll-wrapper{
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+/* 加载动画 */
+
+@keyframes loadingFrames {
+ from { transform: rotate(0deg); }
+ 50% { transform: rotate(180deg); }
+ to { transform: rotate(360deg); }
+}
+
+.start-loading {
+  animation: loadingFrames 1s linear infinite;
+}
+
+/* 左侧 */
+.side-wrapper{
+  background: rgba(255, 255, 255, .5);
+}
+
+.table-scroll{
+  .ivu-table{
+    display: flex !important;
+    flex-direction: column !important;
+    .ivu-table-footer{
+      height: 0;
+    }
+    .ivu-table-tip{
+      display: none;
+    }
+    .ivu-table-body{
+      position: relative;
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      table{
+        height: 100%;
+        position: absolute;
+        top: 0; 
+      }
+    }
+  }
+}
+
+.table-page{
+  .ivu-table-footer{
+    height: 48px !important;
+    line-height: 48px !important;
+  }
+}

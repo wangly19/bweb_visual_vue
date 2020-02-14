@@ -1,0 +1,22 @@
+@import './mixins.scss';
+@import './mode.d.scss';
+
+// 颜色变量 - 界面
+$white: #FFFFFF !default; // 白色
+$dark: #262626 !default; // 黑色
+$main: #007AFF !default; // 蓝色， 界面色调，界面色调
+$error: #f94441 !default; // 错误红色
+$warm: #FF8700 !default; // 警告黄色
+$tool: #2d8cf0 !default;
+$normal: #2EAE00 !default; // 通知绿色
+// 颜色变量 - 文字
+$text: #333333 !default; // 文本， 内容33灰
+$explain: #666973 !default;
+$other: #B0B3BF !default;
+$bg: #F5F6F9 !default;
+// 字体大小
+$size1: rem(12px); // =>小号字体 12px 小像素 提示文本，更改备注(@wang)
+
+$size2: rem(20px); // => 中号字体 20px 中像素 对话框，标题提示框， 更改备注(@wang)
+
+$size3: rem(24px); // => 大号字体 大像素 一级文本，大数据可视化 更改备注(@wang)

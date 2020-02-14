@@ -1,0 +1,47 @@
+ /* mixins 工具函数 */
+
+// rem转换
+@function rem($px){
+  $remSize: $px / 192px;
+  @return $remSize * 1rem;
+}
+
+// 圆角
+@mixin radius($px: 0) {
+  border-radius: $px;
+}
+
+// 边框盒子
+@mixin borderBox() {
+  box-sizing: border-box;
+}
+// flex布局
+@mixin flex($justify: flex-start, $align: flex-start, $direction: row) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+}
+
+@mixin position($position: relative, $top: initial, $right: initial, $bottom: initial, $left: initial) {
+  position: $position;
+  left: $left;
+  right: $right;
+  bottom: $bottom;
+  top: $top,
+}
+
+// 解决绝对定位偏移差
+@mixin transAbsolute($top: initial, $left: initial) {
+  transform: translate($top, $left);
+}
+
+// 设置层级
+@mixin zIndex($zindex: 0) {
+  z-index: $zindex;
+}
+
+@mixin setScroll($x: hidden, $y: auto) {
+  overflow-x: $x;
+  overflow-y: $y;
+}

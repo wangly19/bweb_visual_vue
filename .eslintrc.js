@@ -5,13 +5,22 @@ module.exports = {
   },
   'extends': [
     'plugin:vue/essential',
-    '@vue/standard'
+    '@vue/standard',
+    '@vue/typescript'
   ],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'padded-blocks': 0,
+    'space-before-function-paren': 0,
+    'vue/no-parsing-error': [2, {
+      'x-invalid-end-tag': false
+    }],
+    'prefer-promise-reject-errors': 0,
+    'import/no-duplicates': 0,
+    'vue/valid-v-for': 0
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: '@typescript-eslint/parser'
   }
 }
