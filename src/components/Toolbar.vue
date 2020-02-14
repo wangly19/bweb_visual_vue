@@ -7,9 +7,9 @@
       <h6>当前访问用户: {{$store.getters.name}}</h6>
     </div>
   </div>
-  <div class="tag-list">
-    <p>2019/10一日</p>
-  </div>
+  <!-- <div class="tag-list">
+    <p>2019年11月11日</p>
+  </div> -->
   <ul class="route-list">
     <router-link tag="li" :to="item.path" :class="item.name === $route.name && 'is-active'" v-for="(item, index) in currentRoutesList.children" :key="index">
       <i class="fas" :class="item.meta.icon"></i>
@@ -87,8 +87,12 @@ export default class Toolbar extends Vue {
       }
     }
     .tag-list{
-      @include position($position: absolute, $right: rem(50px), $top: 0);
+      @include position($position: absolute, $right: rem(50px), $top: rem(10px));
       @include flex();
+      p{
+        font-size: rem(25px);
+        font-weight: normal;
+      }
     }
     .route-list{
       align-self: flex-end;

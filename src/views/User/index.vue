@@ -1,20 +1,36 @@
 <template>
 <div class="user-container">
+  <Drawer :closable="false" width="300" v-model="openUserDetails">
+    <CellGroup>
+      <div class="avatar-wrapper">
+        <img src="http://img3.imgtn.bdimg.com/it/u=1208538952,1443328523&fm=26&gp=0.jpg" alt="avatar" class="image-avatar">
+      </div>
+      <Cell title="姓名" extra="赵飞鸿" />
+      <Cell title="生日" extra="1992.08.20" />
+      <Cell title="身份" extra="厂长" />
+      <Cell title="所属站点" extra="深圳站点" />
+      <Cell title="最后活跃时间" extra="2020年2月14日" />
+      <Cell title="账号当前状态">
+        <Tag slot="extra" color="success">正常</Tag>
+      </Cell>
+      <Cell title="邮箱" label="1418202350@qq.com" />
+      <Cell title="联系电话" label="18607940000" />
+      <Cell title="当前住址" label="深圳市龙华区xxxxxxxxxxxxxxxxxxx" />
+    </CellGroup>
+  </Drawer>
   <Modal v-model="openDialog" :title="isCreate ? '添加设备' : '修改设备'" :width="350">
     <Form :model="formDevice" :label-width="80" :rules="rules" ref="userRoles">
-      <FormItem label="设备密码" prop="password">
+      <FormItem label="账号" prop="user">
+        <Input v-model="formDevice.user" placeholtder="请输入账号" :disabled="!isCreate"></Input>
+      </FormItem>
+      <FormItem label="姓名" prop="name">
+        <Input v-model="formDevice.name" placeholtder="请输入姓名"></Input>
+      </FormItem>
+      <FormItem label="密码" prop="password">
         <Input v-model="formDevice.password" placeholtder="请输入设备密码" type="password" password></Input>
       </FormItem>
-      <FormItem label="设备名称" prop="name">
-        <Input v-model="formDevice.name" placeholtder="请输入设备名称"></Input>
-      </FormItem>
-      <FormItem label="所在公司" prop="their">
+      <FormItem label="身份" prop="identity">
         <Input v-model="formDevice.their" placeholtder="请输入公司名称"></Input>
-      </FormItem>
-      <FormItem label="所在站点" prop="areaName">
-        <Select v-model="formDevice.areaName" placeholtder="请选择站点">
-          <Option v-for="item in [{label: '上海市', value: '上海市'}]" :value="item.value" :key="item.value">{{ item.label }}</Option>
-        </Select>
       </FormItem>
     </Form>
     <template slot="footer">
@@ -38,8 +54,9 @@
       </Card>
       <Table border :columns="columnConfig" :data="tableData" :loading="isTableList" class="table-view table-scroll table-page">
         <template slot-scope="{ row }" slot="action">
-          <Button type="primary" style="margin-right: 10px" @click.native="switchDialog('update', row)" size="small">修改</Button>
-          <Button type="error" @click="deleteRow(row.id)" size="small">删除</Button>
+          <Button type="primary" @click.native="switchDialog('update', row)" size="small">修改</Button>
+          <Button type="error" @click="deleteRow(row.id)" size="small" :disabled="!row.status"  style="margin: 0 10px 0 10px;">锁定</Button>
+          <Button type="info" @click="seeDetails(row.id)" size="small">查看</Button>
         </template>
         <template slot="footer">
           <Empty text="还未添加或者导入设备信息" v-if="!tableData.length"></Empty>
@@ -61,7 +78,7 @@
 </template>
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
-import { getDeviceList, alterDevice } from '@/api/Device'
+import { getUserList, alterUser } from '@/api/User'
 import Toolbar from '@/components/Toolbar.vue'
 import Empty from '@/components/Empty.vue'
 import Search from '@/components/Search.vue'
@@ -70,10 +87,8 @@ import FillTable from '@/components/FullTable.js'
 interface ITableData {
   id: number,
   name: string,
-  code: string,
-  their: string,
-  status: boolean,
-  areaName: string
+  user: string,
+  identity: string
 }
 @Component({
   components: {
@@ -87,30 +102,30 @@ interface ITableData {
 export default class DeviceView extends Vue {
   private columnConfig: Array<object> = [
     { title: 'ID', key: 'id', width: 60, align: 'center' },
-    { title: '设备名称', key: 'name' },
-    { title: '设备编码', key: 'code' },
-    { title: '所在公司', key: 'their' },
+    { title: '帐号', key: 'user' },
+    { title: '姓名', key: 'name' },
+    { title: '身份', key: 'identity' },
     { title: '设备状态', key: 'status', slot: 'status', align: 'center', width: 100 },
-    { title: '所在站点', key: 'areaName' },
+    { title: '注册时间', key: 'createTime' },
     { title: '操作', key: 'action', slot: 'action', align: 'center', width: 200 }
   ]
   private searchConfig: Array<object> = [
-    { key: 'status', info: '请选择设备状态', label: '设备状态', isSelect: true, options: [{ label: '在线', value: '1' }, { label: '离线', value: '0' }] },
-    { key: 'areaName', info: '请选择站点', label: '所在公司' },
-    { key: 'their', info: '请输入公司名称', label: '所在站点' },
-    { key: 'name', info: '请输入设备名称', label: '设备名称' }
+    { key: 'user', info: '请输入账号', label: '账号' },
+    { key: 'name', info: '请输入姓名', label: '姓名' }
   ]
   private tableData: Array<ITableData> = []
   private isTableList: boolean = false
   private isSubmit: boolean = false
   private openDialog: boolean = false
+  private openUserDetails: boolean = false
   private rules: object = {
-    password: [{ required: true, message: '请输入设备密码', trigger: 'blur' }],
-    name: [{ required: true, message: '请输入设备名称', trigger: 'blur' }],
-    their: [{ required: true, message: '请输入设备所在公司', trigger: 'blur' }],
-    areaName: [{ required: true, message: '请选择所在站点', trigger: 'change' }]
+    password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+    name: [{ required: true, message: '请输入姓名', trigger: 'blur' }],
+    user: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+    identity: [{ required: true, message: '请选择身份', trigger: 'change' }]
   }
   private formDevice: object | any = {}
+  private userInfo: object = {}
   private isCreate: boolean = true
   private offsetHeight: number = 544
   private total: number = 0
@@ -150,6 +165,11 @@ export default class DeviceView extends Vue {
     this.openDialog = true
   }
 
+  // 查看详情
+  private seeDetails(id: number): void {
+    this.openUserDetails = true
+  }
+
   // 删除表格行数据
   private deleteRow(id: number): void {
     this.$Modal.confirm({
@@ -157,7 +177,7 @@ export default class DeviceView extends Vue {
       content: `是否删除该条角色信息?删除后将无法恢复该条数据。`,
       onOk: async () => {
         try {
-          const { data } = await alterDevice<null>(id, null, 'delete')
+          const { data } = await alterUser<null>(id, null, 'delete')
           this.$Message[data.success ? 'success' : 'error'](data.message)
           this.getTableList()
         } catch (error) {
@@ -177,7 +197,7 @@ export default class DeviceView extends Vue {
     const axiosParams = Object.assign(params, { limit: this.limit })
     try {
       this.isTableList = true
-      const { data } = await getDeviceList(axiosParams, 'get')
+      const { data } = await getUserList(axiosParams, 'get')
       this.tableData = data.list
       this.total = data.total
       this.isTableList = false
@@ -201,7 +221,7 @@ export default class DeviceView extends Vue {
       if (valid) {
         this.isSubmit = true
         try {
-          const { data } = this.isCreate ? await getDeviceList(this.formDevice, 'post') : await alterDevice<object>(this.formDevice.id as number, this.formDevice, 'put')
+          const { data } = this.isCreate ? await getUserList(this.formDevice, 'post') : await alterUser<object>(this.formDevice.id as number, this.formDevice, 'put')
           this.$Message[data.success ? 'success' : 'error'](data.message)
           this.isSubmit = false
           this.openDialog = false
@@ -222,6 +242,18 @@ export default class DeviceView extends Vue {
 
 <style lang="scss" scoped>
 @import '@/assets/scss/global.d.scss';
+  .avatar-wrapper{
+    width: 100%;
+    text-align: center;
+    height: rem(150px);
+    img{
+      height: 100%;
+      width: rem(150px);
+      @include radius(50%);
+      cursor: pointer;
+      border: 5px solid $bg;
+    }
+  }
 .user-container{
   height: 100%;
   @include flex($direction: column);

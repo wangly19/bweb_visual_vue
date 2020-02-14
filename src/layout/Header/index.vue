@@ -1,9 +1,10 @@
 <template>
-  <Header class="app-header">
+  <Header class="app-header" :style="`background: ${color};`">
     <Modal v-model="isShowUpdateUserInfo" fullscreen title="Fullscreen Modal">
         <div>This is a fullscreen modal</div>
     </Modal>
-    <div class="logo"></div>
+    <div class="logo">
+    </div>
     <MenuView></MenuView>
     <ul class="naviction">
       <li class="naviction__item"
@@ -64,6 +65,7 @@ export default class HeaderNav extends Vue {
   @Action('logout') logout: any
   @Getter('isShowToolBar') isShowToolBar!: boolean
   @Mutation('setShowToolBar') setShowToolBar!: any
+  @Getter('colorTheme') color!: string
 
   private isShowUpdateUserInfo: boolean = false
   private iconList: Array<string> = ['fa-angle-double-down', 'fa-atom', 'fa-github', 'fa-bell']
@@ -112,7 +114,8 @@ export default class HeaderNav extends Vue {
       @include radius(3px);
       width: rem(200px);
       height: rem(30px);
-      background: $explain;
+      background: rgba(0, 0, 0, 0.2);
+      @include flex($justify: flex-start, $align: flex-start);
     }
     .naviction {
       @include flex($align: center);

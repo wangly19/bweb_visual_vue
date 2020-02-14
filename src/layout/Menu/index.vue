@@ -1,5 +1,5 @@
 <template>
-<Menu mode="horizontal" theme="dark" :active-name="$route.name" @on-select="onMenuClick">
+<Menu mode="horizontal" theme="dark" :active-name="$route.name" @on-select="onMenuClick" :style="`background: ${color};`">
   <template v-for="(item) in getCurrentRoutes">
     <MenuItem v-if="!item.meta.hidden && item.children.length < 2" :name="item.children[0].name" :to="item.children[0].path">
       <i class="fas" :class="item.children[0].meta.icon"></i>
@@ -30,6 +30,7 @@ import { RouteConfig } from 'vue-router'
 })
 export default class HeaderNav extends Vue {
   @Getter('currentRoutes') getCurrentRoutes!: RouteConfig[]
+  @Getter('colorTheme') color!: string
   private onMenuClick(name: string) {
     console.log(name)
   }

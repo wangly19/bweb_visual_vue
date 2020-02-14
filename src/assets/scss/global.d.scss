@@ -12,7 +12,7 @@ $normal: #2EAE00 !default; // 通知绿色
 // 颜色变量 - 文字
 $text: #333333 !default; // 文本， 内容33灰
 $explain: #666973 !default;
-$other: #B0B3BF !default;
+$other: rgba(255, 255, 255, 0.7) !default;
 $bg: #F5F6F9 !default;
 // 字体大小
 $size1: rem(12px); // =>小号字体 12px 小像素 提示文本，更改备注(@wang)

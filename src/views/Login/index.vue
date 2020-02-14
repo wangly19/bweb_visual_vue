@@ -38,7 +38,8 @@
           <Button type="text" class="item__upword" @click="openDialog = true">申报密码?</Button>
         </FormItem>
         <FormItem>
-            <Button type="success" size="large" long @click="submitLoginForm('formInline')" :loading="isLogin" :disabled="isLogin" @keyup.enter.native="submitLoginForm('formInline')">登录系统</Button>
+            <Button type="success" size="large" long @click="submitLoginForm('formInline')" :loading="isLogin" :disabled="isLogin"
+            @keyup.enter.native="submitLoginForm('formInline')">登录系统</Button>
         </FormItem>
       </Form>
     </div>
@@ -56,6 +57,7 @@ export default class Login extends Vue {
   private isLogin: boolean = false
   private formLogin: object = {}
   private isRemember: boolean = false
+  private isSubmit: boolean = false
   private isPassword: boolean = true
   private openDialog: boolean = false
   private formApply: object = {}

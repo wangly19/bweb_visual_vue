@@ -7,7 +7,8 @@ const getters: GetterTree<any, any> = {
   roles: (state: any) => state.user.roles,
   currentRoutes: (state: any) => state.promiss.currentRoutes,
   addRoutes: (state: any) => state.promiss.addRoutes,
-  isShowToolBar: (state: any) => state.app.isShowToolBar
+  isShowToolBar: (state: any) => state.app.isShowToolBar,
+  colorTheme: (state: any) => state.app.colorTheme
 }
 
 export default getters

@@ -99,7 +99,7 @@ const rolesRoutes: RouteConfig[] = [
     name: 'useradmin',
     meta: {
       title: '人员管理',
-      icon: 'fa-truck',
+      icon: 'fa-user',
       hidden: false
     },
     component: Layout,
@@ -110,11 +110,23 @@ const rolesRoutes: RouteConfig[] = [
         name: 'user',
         meta: {
           title: '账号管理',
-          icon: 'fa-truck',
+          icon: 'fa-user',
           hidden: false
         },
         component: (resolve: any) => {
           require(['@/views/User/index.vue'], resolve)
+        }
+      },
+      {
+        path: '/useradmin/inform',
+        name: 'inform',
+        meta: {
+          title: '账号申报',
+          icon: 'fa-rss-square',
+          hidden: false
+        },
+        component: (resolve: any) => {
+          require(['@/views/User/userNavtion.vue'], resolve)
         }
       }
     ]

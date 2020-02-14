@@ -43,7 +43,7 @@ export default class Layout extends Vue {
   width: 100%;
   .side-wrapper{
     @include position($position: fixed, $top: 0, $right: 0);
-    @include zIndex($zindex: 3);
+    @include zIndex($zindex: 100);
     height: 100%;
     width: 0;
     background: $bg;
