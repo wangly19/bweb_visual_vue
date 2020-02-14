@@ -21,7 +21,7 @@ $danger: #F94441;
 
 // 转换REM函数
 @function REM($px) {
-	@return $px;
+	@return ($px / 192px) * 1rem;
 }
 
 // 定位

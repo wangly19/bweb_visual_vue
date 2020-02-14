@@ -42,9 +42,11 @@ export default {
     }
   },
   methods: {
+    // 添加覆盖物完成
     onPositionSuccess(point, AddressComponent, marker) {
       console.log(point, AddressComponent, marker)
     },
+    // 添加覆盖物失败
     onPositionError(code) {
       console.log(code)
     },
