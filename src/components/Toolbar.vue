@@ -82,7 +82,7 @@ export default class Toolbar extends Vue {
       }
       &__info{
         h6{
-          color: $other;
+          color: $explain;
         }
       }
     }

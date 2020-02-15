@@ -19,8 +19,8 @@
     </div>
     <div class="form-wrapper">
       <div class="logo">
-        <i class="fas fa-spa logo__icon"/>
-        大数据可视化系统
+        <!-- <i class="fas fa-spa logo__icon"/>
+        大数据可视化系统 -->
       </div>
       <Form ref="formInline" :model="formLogin" :rules="loginRules">
         <FormItem prop="user">

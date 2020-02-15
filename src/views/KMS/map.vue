@@ -31,7 +31,7 @@
       </li>
     </ul>
     <ul class="tree-wrapper" v-loading="isTreeLoading">
-        <Empty :text="`暂时还没有物流信息哦！`" v-show="kmsListData.length === 0 && !isTreeLoading"></Empty>
+        <Empty :text="`暂时还没有信息哦！`" v-show="kmsListData.length === 0 && !isTreeLoading"></Empty>
         <li class="item" v-for="(item, index) in kmsListData" :key="index">
           <Card class="item__infobox">
             <p class="title">{{item.upName}}</p>

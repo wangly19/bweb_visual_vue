@@ -8,7 +8,7 @@ const defaultRoutes: RouteConfig[] = [
     component: Layout,
     redirect: '/dashboard',
     meta: {
-      title: '大数据',
+      title: '仪表盘',
       icon: 'fa-rocket',
       hidden: false
     },
@@ -16,7 +16,7 @@ const defaultRoutes: RouteConfig[] = [
       path: '/dashboard',
       name: 'dashboard',
       meta: {
-        title: '大数据',
+        title: '仪表盘',
         icon: 'fa-rocket',
         hidden: false
       },

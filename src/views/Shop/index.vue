@@ -60,8 +60,9 @@
 </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
+import { Component, Vue, Watch, Mixins } from 'vue-property-decorator'
 import { getDeviceList, alterDevice } from '@/api/Device'
+import { dataMixins } from '@/tools/mixins'
 import Toolbar from '@/components/Toolbar.vue'
 import Empty from '@/components/Empty.vue'
 import Search from '@/components/Search.vue'
@@ -84,7 +85,7 @@ interface ITableData {
     FullTable: FillTable as any
   }
 })
-export default class DeviceView extends Vue {
+export default class DeviceView extends Mixins(dataMixins) {
   private columnConfig: Array<object> = [
     { title: 'ID', key: 'id', width: 60, align: 'center' },
     { title: '设备名称', key: 'name' },
@@ -101,7 +102,6 @@ export default class DeviceView extends Vue {
     { key: 'name', info: '请输入设备名称', label: '设备名称' }
   ]
   private tableData: Array<ITableData> = []
-  private isTableList: boolean = false
   private isSubmit: boolean = false
   private openDialog: boolean = false
   private rules: object = {
@@ -112,10 +112,6 @@ export default class DeviceView extends Vue {
   }
   private formDevice: object | any = {}
   private isCreate: boolean = true
-  private offsetHeight: number = 544
-  private total: number = 0
-  private currentPage: number = 1
-  private limit: number = 10
 
   // 绑定页面
   private bindPage(page: number): void {
@@ -214,12 +210,6 @@ export default class DeviceView extends Vue {
     })
   }
 
-  private mounted() {
-    this.$nextTick(() => {
-      let searchDom: HTMLElement | null = document.getElementById('search')
-      this.offsetHeight = searchDom ? searchDom['offsetHeight'] : 0
-    })
-  }
   private async created() {
     this.getTableList()
   }

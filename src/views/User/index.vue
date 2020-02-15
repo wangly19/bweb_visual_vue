@@ -267,22 +267,6 @@ export default class DeviceView extends Vue {
       width: 100%;
       flex: 1;
       @include flex($direction: row-reverse);
-      .shop-info{
-        @include flex($align: center);
-        img{
-          width: rem(60px);
-          height: rem(70px);
-          padding: rem(5px);
-        }
-        .text{
-          @include flex($direction: column, $justify: space-between);
-          height: rem(50px);
-          span{
-            font-size: rem(14px);
-            color: $other;
-          }
-        }
-      }
       .search-wrapper {
         flex: 0 0 rem(300px);
         margin-left: rem(20px);
