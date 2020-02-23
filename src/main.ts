@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule)
   const options = new DocumentBuilder()
   .setTitle('个人后台项目接口文档')
   .setDescription('这是一个Nest.js写的项目接口文档。主要作为admin后台项目使用')
