@@ -1,5 +1,5 @@
 import { User } from "src/users/user.db";
-
+import { Area } from 'src/entity/area.zd'
 const config: Object = {
 	type: 'mysql',
 	host: 'localhost',
@@ -9,7 +9,7 @@ const config: Object = {
 	database: 'visual',
 	timezone: 'UTC',
 	charset: 'utf8mb4',
-    entities: [User],
+    entities: [User, Area],
 	multipleStatements: true,
 	dropSchema: false,
 	synchronize: true,
