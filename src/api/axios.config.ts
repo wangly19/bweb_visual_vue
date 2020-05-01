@@ -7,7 +7,8 @@ import iView from 'view-design'
 const axiosObject: any = axios
 const Progress: any = iView
 const service = axiosObject.default.create({
-  baseURL: 'http://api.wangfanghua.top:7300/mock/5e3eab4e216d1377dea9be86/service',
+  // baseURL: 'http://api.wangfanghua.top:7300/mock/5e3eab4e216d1377dea9be86/service',
+  baseURL: '/',
   timeout: 4000, // 请求超时时间
   maxContentLength: 4000
 })

@@ -15,6 +15,7 @@ import '@/router/routeConfig'
 import '@/assets/config/mapConfig'
 import '@/tools/directive/loading'
 import '@fortawesome/fontawesome-free/css/all.css'
+import '@/mock'
 // 引入图表
 import Viser from 'viser-vue'
 

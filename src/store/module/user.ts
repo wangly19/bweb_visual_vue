@@ -35,12 +35,14 @@ const actions: ActionTree<IState, any> = {
     return new Promise(async (resolve, reject) => {
       try {
         const { data } = await upLogin(formData)
+        console.log(data)
         if (data.success) {
           setStorage('token', data.token)
           commit('_setToken', data.token)
         }
         return resolve(data)
       } catch (error) {
+        console.log(error)
         return reject({
           success: false,
           message: '请求失败'

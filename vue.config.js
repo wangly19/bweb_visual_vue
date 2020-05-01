@@ -12,6 +12,15 @@ module.exports = {
       .set('@', resolve('src')) // 配置@路径
   },
   devServer: {
-    port: 9000
+    port: 9000,
+    proxy: {
+      '/api': {
+        target: 'http://wangfanghua.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+    }
   }
 }

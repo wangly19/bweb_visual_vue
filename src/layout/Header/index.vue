@@ -53,6 +53,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import MenuView from '@/layout/Menu/index.vue'
 import { Getter, Action, Mutation } from 'vuex-class'
+import { cssExpand } from '@/tools/utils'
 
 @Component({
   name: 'headerView',
