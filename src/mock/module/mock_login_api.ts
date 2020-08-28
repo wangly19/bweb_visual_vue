@@ -4,7 +4,7 @@ const createLoginAPI = function (options: string) {
     data: {
       success: true,
       token: 1111,
-      message: '登陆成功'
+      message: '即将进入'
     }
   }
 }

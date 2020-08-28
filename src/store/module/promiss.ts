@@ -39,6 +39,7 @@ const actions: ActionTree<string, any> = {
         sendRoutes = filterRoutes(rolesRoutes, roles)
       }
       commit('_setRoutesList', sendRoutes)
+      console.log(sendRoutes, 'send')
       resolve(sendRoutes)
     })
   }
